@@ -197,5 +197,6 @@
   padding: 5px;
 }
 .open-ex button:hover {
-  transform: scale(1.2)
+  transform: scale(1.2);
+  background-color: #000000c9;
 }
