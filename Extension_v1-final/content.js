@@ -316,6 +316,7 @@ function Ramdomcontent() {
       ChangeForIMGTag(content)
     }
   }
+  $('#popup-hover').remove()
 }
 
 function createAttBackground(getProp, image) {
@@ -429,7 +430,7 @@ function EventClick(e) {
         <h4>${$(el).css('background-image') != 'none'? $(el)[0].nodeName + ' - BG': $(el)[0].nodeName}</h4>
       </div>
       <div>
-        <button id="editCotent"><img src="${chrome.runtime.getURL('images/refresh-64.png')}"/></button>
+        <button id="editCotent"><img src="${chrome.runtime.getURL('images/update.png')}"/></button>
         <select class="select-state">
         <option value="2">Random</option>
         <option value="3">Body content</option>
@@ -506,7 +507,7 @@ function EventClick(e) {
 function EventHover(e) {
   let el = e.target
   let getProp = window.getComputedStyle(el, null)
-  if (!$(e.target).is('.popup-font, .popup-font *')) {
+  if (!$(e.target).is('.popup-font, .popup-font *, .open-ex, .open-ex button')) {
     if ($('#popup-hover').length) {
       $(pastEl).removeClass('highlight-ex')
       $('#popup-hover').remove()
@@ -520,6 +521,7 @@ function EventHover(e) {
     </div>`
     document.body.appendChild(hoverEl)
     let styleHover = document.getElementById('popup-hover')
+    $(styleHover).css('top', $(el).offset().top - 5 + 'px')
     $(styleHover).css('left', $(el).offset().left + 'px')
     let elHoverBox = $(styleHover).find('.hover-element')
     let tagEl = $(elHoverBox).find('h4')
@@ -534,7 +536,7 @@ function EventHover(e) {
 }
 
 function btnEditClick(e) {
-  if ($(e.target).is('.popup-font #editCotent img')) {
+  if ( $(e.target).is('.popup-font #editCotent img')) { //$(e.target).is('.select-state') ||
     Ramdomcontent()
   }
 }
@@ -684,6 +686,10 @@ $("body").on('click', '#btnClose', () => {
 $('.btnGlobal').click(function (e) {
   WonderTest.Disable()
 })
+// event dropdown change
+// $("body").on('change', '.select-state', function (e) {
+//   btnEditClick(e)
+// })
 
 //tooltip css
 document.onkeydown = WonderKeyMap;

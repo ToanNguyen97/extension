@@ -32,6 +32,7 @@
   },
   "web_accessible_resources": [
 		"images/refresh-64.png",
-		"images/close_icon.png"
+		"images/close_icon.png",
+		"images/update.png"
 	]
 }
