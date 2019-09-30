@@ -455,8 +455,6 @@ function EventClick(e) {
       </div>
       ${ $(el)[0].nodeName == 'IMG'? createAttImage(getProp, $(el)[0]): ($(el).css('background-image') != 'none' ? createAttBackground(getProp, $(el)[0]): createNormalProperty(getProp))}
     </div>
-    <div class="card-button">
-    </div>
     </div>`
     document.body.appendChild(newEl)
     let styleNew = document.getElementById('popup-detail')
