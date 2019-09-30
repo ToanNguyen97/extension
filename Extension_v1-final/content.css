@@ -167,6 +167,8 @@
   font-size: 15px;
   padding: 3px;
   padding-right: 10px;
+  display: flex;
+  justify-content: center;
 }
 #btnClose {
   background-color: transparent;
