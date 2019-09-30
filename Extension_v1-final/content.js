@@ -466,7 +466,7 @@ function EventClick(e) {
       $(styleNew).css('top', $(el).offset().top + 'px')
       
     } else {
-      $(styleNew).css('top',50 + $(el).offset().top + 'px')
+      $(styleNew).css('top',$(el).innerHeight() + $(el).offset().top + 'px')
       $('.hover-ex').css('display', 'none')
     }
     // $(styleNew).css('top', $(el).offset().top + 'px')
