@@ -188,6 +188,84 @@ function CreateBodyText() {
   return bodyText
 }
 
+function AllCardBasic() {
+  let cardBasic = document.createElement('div')
+  $(cardBasic).addClass('append-conent')
+  cardBasic.innerHTML =`<h2>What is Lor<a href="#">em I</a>psum?</h2>
+  <p><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+  <h3>What is Lor<a href="#">em I</a>psum?</h3>
+  <p><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+  <h4>What is Lor<a href="#">em I</a>psum?</h4>
+  <p><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+  <h5>What is Lor<a href="#">em I</a>psum?</h5>
+  <p><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+  <h6>What is Lor<a href="#">em I</a>psum?</h6>
+  <p><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+  <ul>
+    <li><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry.</li>
+    <li><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. <ol>
+    <li><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry.</li>
+    <li><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </li>
+    <li><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</li>
+  </ol></li>
+    <li><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</li>
+  </ul>
+  <p><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+  <ol>
+    <li><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry.</li>
+    <li><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. <ol>
+    <li><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry.</li>
+    <li><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </li>
+    <li><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</li>
+  </ol></li>
+    <li><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</li>
+  </ol>
+  <p><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+  <p><strong><img class="size-full wp-image-547 alignleft" src="https://ascent360.ubu.carbon8test.com/wp-content/uploads/2019/08/PineMountain.jpg" alt="Pine Mountain" width="200" height="200" />Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+  <p><strong><img class="size-full wp-image-545 alignright" src="https://ascent360.ubu.carbon8test.com/wp-content/uploads/2019/08/GP.jpg" alt="GP" width="200" height="200" />Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+  <p><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+  <p><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+  <p><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+  <table style="border-collapse: collapse; width: 100%;">
+  <tbody>
+  <tr>
+  <td style="width: 33.9277%;">
+  <h3><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry</h3>
+  </td>
+  <td style="width: 35.4135%;"><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry. <strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry</td>
+  <td style="width: 30.6587%;">
+  <ul>
+    <li><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry</li>
+    <li><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry</li>
+    <li><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry</li>
+  </ul>
+  </td>
+  </tr>
+  <tr>
+  <td style="width: 33.9277%;"><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry. <strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry <strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry <strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry</td>
+  <td style="width: 35.4135%;"><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry</td>
+  <td style="width: 30.6587%;">
+  <h5><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry</h5>
+  </td>
+  </tr>
+  <tr>
+  <td style="width: 33.9277%;"><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry</td>
+  <td style="width: 35.4135%;">
+  <ol>
+    <li><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry</li>
+    <li><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry</li>
+    <li><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry. <strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry</li>
+  </ol>
+  </td>
+  <td style="width: 30.6587%;">
+  <h4><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry</h4>
+  </td>
+  </tr>
+  </tbody>
+  </table>`
+  return cardBasic
+}
+
 function Ramdomcontent() {
   let selected = $('.select-state')
   let randomNumber = Math.floor(Math.random() * 4 + 1);
@@ -215,6 +293,11 @@ function Ramdomcontent() {
       $('.append-conent').remove()
       $(content).css('display', 'none')
       $(content)[0].after(CreateBodyText())
+    }
+    if ($(selected).val() == 4) {
+      $('.append-conent').remove()
+      $(content).css('display', 'none')
+      $(content)[0].after(AllCardBasic())
     }
   } else if ($(content)[0].nodeName == 'A') {
     if ($(selected).val() == 1) {
@@ -283,7 +366,7 @@ function getHoverCss(el) {
   <div class="hover-ex seperate-ex">
   <h4>Hover Attribute</h4>
   <ul>
-    <li>Background-color:&nbsp;${$(el).css('background-color')}</li>
+    <li>Background-color:&nbsp;${ConvertRGBToHex($(el).css('background-color'))}  <span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid #000;background-color: ${ConvertRGBToHex($(el).css('background-color'))};">&nbsp;</span></li>
     <li>Color:&nbsp;${ConvertRGBToHex($(el).css('color'))} <span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid ${ConvertRGBToHex($(el).css('color'))};background-color: ${ConvertRGBToHex($(el).css('color'))};">&nbsp;</span></li>
     <li>Position:&nbsp;${$(el).css('position')}</li>
     <li>Transform:&nbsp;${$(el).css('transform')}</li>
@@ -300,7 +383,7 @@ function getHoverCssChange(el) {
   <div class="hover-change-ex seperate-ex" style="max-width: 0; padding: 0;">
   <h4>Font Attribute</h4>
   <ul>
-    <li>Background-color:&nbsp;${$(el).css('background-color')}</li>
+    <li>Background-color:&nbsp;${ConvertRGBToHex($(el).css('background-color'))}  <span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid #000;background-color: ${ConvertRGBToHex($(el).css('background-color'))};">&nbsp;</span></li>
     <li>Color:&nbsp;${ConvertRGBToHex($(el).css('color'))} <span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid ${ConvertRGBToHex($(el).css('color'))};background-color: ${ConvertRGBToHex($(el).css('color'))};">&nbsp;</span></li>
     <li>Font-size:&nbsp;${getProp.getPropertyValue('font-size')}</li>
         <li>Font-weight:&nbsp;${getProp.getPropertyValue('font-weight')}</li>
@@ -346,12 +429,12 @@ function EventClick(e) {
         <h4>${$(el).css('background-image') != 'none'? $(el)[0].nodeName + ' - BG': $(el)[0].nodeName}</h4>
       </div>
       <div>
-        <button id="hoverEffect">Hover EF</button>
         <button id="editCotent"><img src="${chrome.runtime.getURL('images/refresh-64.png')}"/></button>
         <select class="select-state">
         <option value="2">Random</option>
         <option value="3">Body content</option>
         <option value="1">Refesh</option>
+        <option value="4">All card basic</option>
         </select>
       </div>
       <div class="btn-element">
@@ -379,12 +462,22 @@ function EventClick(e) {
     let styleNew = document.getElementById('popup-detail')
     let cardContent = document.getElementsByClassName('card-content')
     $(styleNew).css('height', 118 + cardContent[0].clientHeight + 10 + 'px')
-    $(styleNew).css('top', 50 + $(el).offset().top  + 'px')
+    if ($(el).css('cursor') == 'pointer') {
+      $(styleNew).css('top', $(el).offset().top + 'px')
+      
+    } else {
+      $(styleNew).css('top',50 + $(el).offset().top + 'px')
+      $('.hover-ex').css('display', 'none')
+    }
+    // $(styleNew).css('top', $(el).offset().top + 'px')
     $(styleNew).css('left', $(el).offset().left + 'px')
     $('.font-ex').after(getHoverCss(el))
-    $('.hover-ex').css('max-width', '280px')
+    $('.hover-ex').css('max-width', '290px')
     $('.hover-ex').css('padding-right', '15px')
     $('.hover-ex').css('padding-left', '15px')
+    if ($(el).css('cursor') != 'pointer') {
+      $('.hover-ex').css('display', 'none')
+    }
     //-----------------TH2------------
     setTimeout(() => {
       // getHoverCssChange(el)
@@ -416,7 +509,7 @@ function EventHover(e) {
   let el = e.target
   let getProp = window.getComputedStyle(el, null)
   if (!$(e.target).is('.popup-font, .popup-font *')) {
-    if($('#popup-hover').length){
+    if ($('#popup-hover').length) {
       $(pastEl).removeClass('highlight-ex')
       $('#popup-hover').remove()
     }
@@ -429,7 +522,6 @@ function EventHover(e) {
     </div>`
     document.body.appendChild(hoverEl)
     let styleHover = document.getElementById('popup-hover')
-    $(styleHover).css('top', $(el).offset().top - 20 + 'px')
     $(styleHover).css('left', $(el).offset().left + 'px')
     let elHoverBox = $(styleHover).find('.hover-element')
     let tagEl = $(elHoverBox).find('h4')
@@ -574,9 +666,9 @@ if (WonderTest.haveEventListeners === false) {
   WonderTest.Disable()
 }
 // click button show property hover
-$("body").on('click', '#hoverEffect', () => {
-  $('.hover-ex').css('display', 'block');
-})
+// $("body").on('click', '#hoverEffect', () => {
+//   $('.hover-ex').css('display', 'block');
+// })
 $("body").on('click', '#btnClose', () => {
   let popupNew = document.getElementById('popup-ex')
   if (popupNew != null) {
