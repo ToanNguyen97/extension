@@ -12,6 +12,7 @@ function ConvertDecToHex(nb) {
 
   return nbHexa;
 }
+console.log(123)
 
 function ConvertRGBToHex(str) {
   var start = str.search(/\(/) + 1;
