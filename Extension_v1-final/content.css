@@ -144,7 +144,7 @@
 }
 
 #popup-hover {
-  z-index: 333;
+  z-index: 3333333;
   position: absolute;
   margin-top: -30px;
   font-family: Arial, Helvetica, sans-serif;
@@ -179,4 +179,23 @@
 }
 .ex-d-none {
   display: none !important;
+}
+.open-ex {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 99999;
+}
+.open-ex button {
+  transition: .3s all ease;
+  border: none;
+  border-radius: 20px;
+  background-color: #000000c9;
+  color: white;
+  cursor: pointer;
+  font-size: 10px;
+  padding: 5px;
+}
+.open-ex button:hover {
+  transform: scale(1.2)
 }

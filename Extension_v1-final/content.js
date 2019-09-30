@@ -320,7 +320,7 @@ function EventClick(e) {
    for (var i = 0; i < elements.length; i++) {
      elements[i].removeEventListener("mouseover", EventHover, false);
    }
-  if (!$(e.target).is('.popup-font, .popup-font *')) {
+  if (!$(e.target).is('.popup-font, .popup-font *, .open-ex, .open-ex button')) {
     e.preventDefault()
     let getProp = window.getComputedStyle(el, null)
     let popupNew = document.getElementById('popup-ex')
@@ -522,8 +522,10 @@ function WonderTest() {
       if($(elements[i]).is('a.ps-as')) {
         $($(elements[i]).addClass('ex-d-none'))
       }
-      elements[i].addEventListener("click", EventClick, false);
-      elements[i].addEventListener("mouseover", EventHover, false);
+      if(!$(elements[i]).is('.open-ex, .open-ex button')) {
+        elements[i].addEventListener("click", EventClick, false);
+        elements[i].addEventListener("mouseover", EventHover, false);
+      }
     }
     this.haveEventListeners = true;
   }
@@ -550,9 +552,17 @@ function WonderTest() {
 }
 
 WonderTest.prototype.Enable = function () {
+  let divClose = document.createElement('div')
+  $(divClose).addClass('open-ex')
+  divClose.innerHTML = `
+  <button title="Good Bye!!" class="btnGlobal">Exit Tool</button>`
+  document.body.appendChild(divClose)
   this.AddEventListeners();
 }
 WonderTest.prototype.Disable = function () {
+  if($('.open-ex').length > 0) {
+    $('.open-ex').remove()
+  }
   this.RemoveEventListeners();
 }
 
@@ -576,8 +586,13 @@ $("body").on('click', '#btnClose', () => {
   }
   var elements = WonderTest.GetAllElements(document.body);
   for (var i = 0; i < elements.length; i++) {
-    elements[i].addEventListener("mouseover", EventHover, false);
+    if(!$(elements[i]).is('.open-ex, .open-ex button')) {
+      elements[i].addEventListener("mouseover", EventHover, false);
+    }
   }
+})
+$('.btnGlobal').click(function (e) {
+  WonderTest.Disable()
 })
 
 //tooltip css
