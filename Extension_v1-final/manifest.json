@@ -1,0 +1,36 @@
+{
+  "name": "9th Wonder Tester",
+  "description": "Help QA can improve time to test demo",
+  "version": "0.0.3",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_title": "Help QA can improve time to test demo",
+    "default_icon": "images/icons8-increase-font-16.png"
+  },
+  "permissions": [
+    "contextMenus",
+    "activeTab",
+    "tabs",
+    "https://*.com/*",
+    "notifications"
+  ],
+  "background": { "page":"background.html" },
+  "icons": {
+    "16": "images/icons8-increase-font-16.png",
+    "32": "images/icons8-increase-font-32.png",
+    "48": "images/icons8-increase-font-48.png",
+    "128": "images/icons8-increase-font-100.png"
+  },
+    "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+1",
+        "mac": "MacCtrl+Shift+1"
+      },
+      "description": "Opens Tool Detect"
+    }
+  },
+  "web_accessible_resources": [
+		"images/refresh-64.png"
+	]
+}
