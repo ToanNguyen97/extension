@@ -59,14 +59,12 @@
 }
 .card-button button,
 .card-des button {
-  
+  padding: 0;
   cursor: pointer;
   /* border-radius: 11px; */
   border: none;
-  background-color: red;
   color: white;
   text-align: center;
-  padding: 6px 10px;
 }
 .card-button button:hover, .card-des button:hover {
   background-color: #45e345;
@@ -171,4 +169,14 @@
   font-size: 15px;
   padding: 3px;
   padding-right: 10px;
+}
+
+#btnClose img {
+  width: 20px;
+}
+#editCotent img {
+  width: 30px;
+}
+.ex-d-none {
+  display: none !important;
 }

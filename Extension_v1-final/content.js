@@ -148,22 +148,6 @@ function ChangeForPTag(num, el) {
       `
       break;
     }
-    // case 4: {
-    //   $('.append-conent').remove()
-    //   let appendContent = document.createElement('div')
-    //   $(appendContent).addClass('append-conent')
-    //   let ul = document.createElement('ul')
-    //   ul.innerHTML = `
-    //     <li>Lorem ipsum dolor sit amet.111</li>
-    //     <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</li>
-    //     <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi culpa quas incidunt sint! Tempora, totam!</li>
-    //     <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dignissimos praesentium dolorum eum? Consequatur quasi vitae deleniti dignissimos repellendus sint itaque.</li>
-    //   `
-    //   $(appendContent).append(ul)
-    //   $(el)[0].after(appendContent)
-    //   $(el).css('display', 'none')
-    //   break;
-    // }
     default: {
       $(el)[0].innerText = $(content)[0].innerText
       break;
@@ -363,7 +347,7 @@ function EventClick(e) {
       </div>
       <div>
         <button id="hoverEffect">Hover EF</button>
-        <button id="editCotent">Change</button>
+        <button id="editCotent"><img src="${chrome.runtime.getURL('images/refresh-64.png')}"/></button>
         <select class="select-state">
         <option value="2">Random</option>
         <option value="3">Body content</option>
@@ -371,7 +355,7 @@ function EventClick(e) {
         </select>
       </div>
       <div class="btn-element">
-        <button id="btnClose">Close</button>
+  <button id="btnClose"><img src="${chrome.runtime.getURL('images/close_icon.png')}"/></button>
       </div>
     </div>
     <div class="card-content">
@@ -422,7 +406,9 @@ function EventClick(e) {
   //   WonderTest.Disable();
   // })
   let addEF = document.getElementById('popup-detail')
-  EffectMoveBox(addEF)
+  if($(addEF).length > 0) {
+    EffectMoveBox(addEF)
+  }
   e.stopPropagation()
 }
 
@@ -443,7 +429,7 @@ function EventHover(e) {
     </div>`
     document.body.appendChild(hoverEl)
     let styleHover = document.getElementById('popup-hover')
-    $(styleHover).css('top', $(el).offset().top - 5 + 'px')
+    $(styleHover).css('top', $(el).offset().top - 20 + 'px')
     $(styleHover).css('left', $(el).offset().left + 'px')
     let elHoverBox = $(styleHover).find('.hover-element')
     let tagEl = $(elHoverBox).find('h4')
@@ -458,7 +444,7 @@ function EventHover(e) {
 }
 
 function btnEditClick(e) {
-  if ($(e.target).is('.popup-font #editCotent')) {
+  if ($(e.target).is('.popup-font #editCotent img')) {
     Ramdomcontent()
   }
 }
@@ -533,6 +519,9 @@ function WonderTest() {
     var document = GetCurrentDocument();
     var elements = this.GetAllElements(document.body);
     for (var i = 0; i < elements.length; i++) {
+      if($(elements[i]).is('a.ps-as')) {
+        $($(elements[i]).addClass('ex-d-none'))
+      }
       elements[i].addEventListener("click", EventClick, false);
       elements[i].addEventListener("mouseover", EventHover, false);
     }
@@ -550,6 +539,9 @@ function WonderTest() {
       $(exPopupHover).remove()
     }
     for (var i = 0; i < elements.length; i++) {
+      if($(elements[i]).hasClass('ex-d-none')) {
+        $($(elements[i]).removeClass('ex-d-none'))
+      }
       elements[i].removeEventListener("click", EventClick, false);
       elements[i].removeEventListener("mouseover", EventHover, false);
     }
