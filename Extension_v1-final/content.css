@@ -37,6 +37,8 @@
 .card-des h4 {
   margin-bottom: 0;
   font-weight: bold;
+  color: #FFFFFF;
+  text-decoration: underline;
 }
 .seperate-ex h4 {
   margin-bottom: 0;
@@ -116,7 +118,7 @@
   margin-right: 10px;
 }
 .btn-element {
-  margin-left: 10px;
+  margin-right: -15px;
 }
 
 .hoverEffect {
@@ -127,7 +129,7 @@
   transition: .5s all;
   overflow: hidden;
   padding: 0;
-  display: none;
+  /* display: none; */
 }
 
 .font-ex{
