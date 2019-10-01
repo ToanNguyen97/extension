@@ -132,7 +132,7 @@
 
 .hover-change-ex {
   opacity: 1;
-  white-space: nowrap;
+  white-space: initial;
   width: 295px;
   max-width: 100%;
 	animation-name: fadeInOpacity;
