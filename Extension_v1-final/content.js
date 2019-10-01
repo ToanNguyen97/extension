@@ -479,6 +479,7 @@ function getHoverCssChange(el) {
   let color = DetecColor(el)
   let hoverPropertyChange = `
   <div class="hover-change-ex seperate-ex" style="max-width: 0; padding: 0;">
+<<<<<<< HEAD
     <h4>Font Attribute</h4>
     <ul>
       <li>Background-color:&nbsp;${colorBG}  <span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid #000;background-color: ${colorBG};">&nbsp;</span></li>
@@ -490,6 +491,20 @@ function getHoverCssChange(el) {
       <li>Opacity:&nbsp;${$(el).css('opacity')}</li>
       <li>Text-align:&nbsp;${$(el).css('text-align')}</li>
       <li>Letter-spacing:&nbsp;${$(el).css('letter-spacing')}</li>
+=======
+  <h4>Font Attribute</h4>
+  <ul>
+    <li>Background-color:&nbsp;${colorBG}  <span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid #000;background-color: ${colorBG};">&nbsp;</span></li>
+    <li>Color:&nbsp;${color} <span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid ${color};background-color: ${color};">&nbsp;</span></li>
+    <li>Font-size:&nbsp;${$(el).css('font-size')}</li>
+        <li>Font-weight:&nbsp;${$(el).css('font-weight')}</li>
+        <li>Opacity:&nbsp;${$(el).css('opacity')}</li>
+        <li>Font-family:&nbsp;${$(el).css('font-family')}</li>
+        <li>Line-height:&nbsp;${$(el).css('line-height')}</li>
+        <li>Text-align:&nbsp;${$(el).css('text-align')}</li>
+        <li>Letter-spacing:&nbsp;${$(el).css('letter-spacing')}</li>
+        
+>>>>>>> master
     </ul>
   </div>`
   return hoverPropertyChange
@@ -550,6 +565,7 @@ function EventClick(e) {
         <li>Line-height:&nbsp;${getProp.getPropertyValue('line-height')}</li>
         <li>Text-align:&nbsp;${getProp.getPropertyValue('text-align')}</li>
         <li>Letter-spacing:&nbsp;${getProp.getPropertyValue('letter-spacing')}</li>
+        <li>Opacity:&nbsp;${$(el).css('opacity')}</li>
         </ul>
       </div>
       ${ $(el)[0].nodeName == 'IMG'? createAttImage(getProp, $(el)[0]): ($(el).css('background-image') != 'none' ? createAttBackground(getProp, $(el)[0]): createNormalProperty(getProp))}
@@ -559,13 +575,18 @@ function EventClick(e) {
     let styleNew = document.getElementById('popup-detail')
     let cardContent = document.getElementsByClassName('card-content')
     // $(styleNew).css('height', '360px')
-    $(styleNew).css('height', 128 + cardContent[0].clientHeight + 10 + 'px')
-    if ($(el).css('cursor') == 'pointer') {
-      $(styleNew).css('top', $(el).offset().top + 'px')
+    $(styleNew).css('height', 158 + cardContent[0].clientHeight + 10 + 'px')
 
-    } else {
-      $(styleNew).css('top', $(el).innerHeight() + $(el).offset().top + 'px')
-      $('.hover-ex').css('display', 'none')
+    if($(el).offset().top >= 8300 ){
+      $(styleNew).css('top', -370 + $(el).offset().top - $(el).innerHeight() + 'px')
+    }else {
+      if ($(el).css('cursor') == 'pointer') {
+        $(styleNew).css('top', $(el).offset().top + 'px')
+  
+      } else {
+        $(styleNew).css('top', $(el).innerHeight() + $(el).offset().top + 'px')
+        $('.hover-ex').css('display', 'none')
+      }
     }
 
     // $(styleNew).css('top', $(el).offset().top + 'px')
@@ -693,7 +714,11 @@ function WonderTest() {
     }
     return elements;
   }
+<<<<<<< HEAD
   this.eleHasFontSize = ['H1','H2','H3','H4','H5','H6', 'A', 'P', 'SPAN' ]
+=======
+  this.eleHasFontSize = ['H1','H2','H3','H4','H5','H6', 'A', 'P','SPAN' ]
+>>>>>>> master
   this.eleDontHasFontSize = ['IMG', 'BG']
   this.eleDontHas = ['DIV']
   this.haveEventListeners = false;
