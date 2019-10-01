@@ -679,14 +679,9 @@ function WonderTest() {
     var document = GetCurrentDocument();
     var elements = this.GetAllElements(document.body);
     for (var i = 0; i < elements.length; i++) {
-<<<<<<< HEAD
       if($(elements[i]).is('a.ps-as')) {
         $(elements[i]).addClass('ex-d-none')
         $(elements[i]).parent().addClass('pointer-ex')
-=======
-      if ($(elements[i]).is('a.ps-as')) {
-        $($(elements[i]).addClass('ex-d-none'))
->>>>>>> master
       }
       if (!$(elements[i]).is('.open-ex, .open-ex button')) {
         elements[i].addEventListener("click", EventClick, false);
@@ -707,14 +702,9 @@ function WonderTest() {
       $(exPopupHover).remove()
     }
     for (var i = 0; i < elements.length; i++) {
-<<<<<<< HEAD
       if($(elements[i]).hasClass('ex-d-none')) {
         $(elements[i]).removeClass('ex-d-none')
         $(elements[i]).parent().removeClass('pointer-ex')
-=======
-      if ($(elements[i]).hasClass('ex-d-none')) {
-        $($(elements[i]).removeClass('ex-d-none'))
->>>>>>> master
       }
       elements[i].removeEventListener("click", EventClick, false);
       elements[i].removeEventListener("mouseover", EventHover, false);
