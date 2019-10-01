@@ -467,7 +467,7 @@ function getHoverCss(el) {
     <li>Color:&nbsp;${color} <span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid ${color};background-color: ${color};">&nbsp;</span></li>
     <li>Position:&nbsp;${$(el).css('position')}</li>
     <li>Opacity:&nbsp;${$(el).css('opacity')}</li>
-    ${$(el).css('transform')!= 'none'? 'trannsform:' + ConvertMaxtrixToTransform(el):''}
+    ${$(el).css('transform')!= 'none'? '  <li>trannsform:&nbsp;' + ConvertMaxtrixToTransform(el)+'</li>':''}
     </ul>
   </div>`
   return hoverProperty
