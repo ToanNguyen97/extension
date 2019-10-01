@@ -162,8 +162,11 @@
 }
 
 .hover-element h4 {
+  display: flex;
+  align-items: center;
   padding: 5px 10px;
-
+  margin: 0;
+  font-size: 20px;
 }
 
 .width-box {
