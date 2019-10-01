@@ -479,7 +479,6 @@ function getHoverCssChange(el) {
   let color = DetecColor(el)
   let hoverPropertyChange = `
   <div class="hover-change-ex seperate-ex" style="max-width: 0; padding: 0;">
-<<<<<<< HEAD
     <h4>Font Attribute</h4>
     <ul>
       <li>Background-color:&nbsp;${colorBG}  <span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid #000;background-color: ${colorBG};">&nbsp;</span></li>
@@ -491,20 +490,6 @@ function getHoverCssChange(el) {
       <li>Opacity:&nbsp;${$(el).css('opacity')}</li>
       <li>Text-align:&nbsp;${$(el).css('text-align')}</li>
       <li>Letter-spacing:&nbsp;${$(el).css('letter-spacing')}</li>
-=======
-  <h4>Font Attribute</h4>
-  <ul>
-    <li>Background-color:&nbsp;${colorBG}  <span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid #000;background-color: ${colorBG};">&nbsp;</span></li>
-    <li>Color:&nbsp;${color} <span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid ${color};background-color: ${color};">&nbsp;</span></li>
-    <li>Font-size:&nbsp;${$(el).css('font-size')}</li>
-        <li>Font-weight:&nbsp;${$(el).css('font-weight')}</li>
-        <li>Opacity:&nbsp;${$(el).css('opacity')}</li>
-        <li>Font-family:&nbsp;${$(el).css('font-family')}</li>
-        <li>Line-height:&nbsp;${$(el).css('line-height')}</li>
-        <li>Text-align:&nbsp;${$(el).css('text-align')}</li>
-        <li>Letter-spacing:&nbsp;${$(el).css('letter-spacing')}</li>
-        
->>>>>>> master
     </ul>
   </div>`
   return hoverPropertyChange
@@ -714,11 +699,7 @@ function WonderTest() {
     }
     return elements;
   }
-<<<<<<< HEAD
-  this.eleHasFontSize = ['H1','H2','H3','H4','H5','H6', 'A', 'P', 'SPAN' ]
-=======
   this.eleHasFontSize = ['H1','H2','H3','H4','H5','H6', 'A', 'P','SPAN' ]
->>>>>>> master
   this.eleDontHasFontSize = ['IMG', 'BG']
   this.eleDontHas = ['DIV']
   this.haveEventListeners = false;
