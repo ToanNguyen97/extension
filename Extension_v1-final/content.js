@@ -29,12 +29,49 @@ function ConvertRGBToHex(str) {
   if (hexStr == "#00000000") {
     hexStr = "#FFFFFF";
   }
-
   //hexStr = '<span style="border: 1px solid #000000 !important;width: 8px !important;height: 8px !important;display: inline-block !important;background-color:'+ hexStr +' !important;"></span> ' + hexStr;
 
   return hexStr;
 }
+function ConvertRGBAToHex(rgba) {
+  let sep = rgba.indexOf(",") > -1 ? "," : " ";
+  rgba = rgba.substr(5).split(")")[0].split(sep);
+                
+  // Strip the slash if using space-separated syntax
+  if (rgba.indexOf("/") > -1)
+    rgba.splice(3,1);
 
+  for (let R in rgba) {
+    let r = rgba[R];
+    if (r.indexOf("%") > -1) {
+      let p = r.substr(0,r.length - 1) / 100;
+
+      if (R < 3) {
+        rgba[R] = Math.round(p * 255);
+      } else {
+        rgba[R] = p;
+      }
+    }
+  }
+  let r = (+rgba[0]).toString(16),
+      g = (+rgba[1]).toString(16),
+      b = (+rgba[2]).toString(16),
+      a = Math.round(+rgba[3] * 255).toString(16);
+
+  if (r.length == 1)
+    r = "0" + r;
+  if (g.length == 1)
+    g = "0" + g;
+  if (b.length == 1)
+    b = "0" + b;
+  if (a.length == 1)
+    a = "0" + a;
+  let hexStr = "#" + r + g + b + a;
+  if (hexStr == "#00000000") {
+    hexStr = "#FFFFFF";
+  }
+  return hexStr;
+}
 function EffectMoveBox(el) {
   let x = 0
   let y = 0
@@ -319,12 +356,29 @@ function Ramdomcontent() {
   $('#popup-hover').remove()
 }
 
+function DetecColor(el) {
+  let color
+  if($(el).css('color').match(/rgba/)) {
+    return ConvertRGBAToHex($(el).css('color'))
+  } else if($(el).css('color').match(/rgb/)) {
+   return ConvertRGBToHex($(el).css('color'))
+  }
+}
+function DetecBGColor(el) {
+  if($(el).css('background-color').match(/rgba/)) {
+    return ConvertRGBAToHex($(el).css('background-color'))
+  } else if($(el).css('background-color').match(/rgb/)) {
+    return ConvertRGBToHex($(el).css('background-color'))
+  }
+}
+
 function createAttBackground(getProp, image) {
+  let colorBG = DetecBGColor(el)
   let background = `<div class="background-ex seperate-ex">
   <h4>Background Attribute</h4>
   <ul>
     <li>Background-position:&nbsp;${image.style.backgroundPosition}</li>
-    <li>Background-color:&nbsp;${ConvertRGBToHex(getProp.getPropertyValue('background-color'))}<span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid ${ ConvertRGBToHex(getProp.getPropertyValue('background-color')) == '#FFFFFF'? 'black': ConvertRGBToHex(getProp.getPropertyValue('background-color')) };background-color: ${ConvertRGBToHex(getProp.getPropertyValue('background-color'))};">&nbsp;</span></li>
+    <li>Background-color:&nbsp;${colorBG}<span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid ${ colorBG == '#FFFFFF'? 'black': colorBG };background-color: ${colorBG};">&nbsp;</span></li>
     <li>Width:&nbsp;${getProp.getPropertyValue('width')}</li>
     <li>Max-width:&nbsp;${getProp.getPropertyValue('max-width')}</li>
     <li>Height:&nbsp;${getProp.getPropertyValue('height')}</li>
@@ -363,12 +417,14 @@ function createNormalProperty(getProp) {
 }
 
 function getHoverCss(el) {
+  let colorBG = DetecBGColor(el)
+  let color = DetecColor(el)
   let hoverProperty = `
   <div class="hover-ex seperate-ex">
   <h4>Hover Attribute</h4>
   <ul>
-    <li>Background-color:&nbsp;${ConvertRGBToHex($(el).css('background-color'))}  <span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid #000;background-color: ${ConvertRGBToHex($(el).css('background-color'))};">&nbsp;</span></li>
-    <li>Color:&nbsp;${ConvertRGBToHex($(el).css('color'))} <span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid ${ConvertRGBToHex($(el).css('color'))};background-color: ${ConvertRGBToHex($(el).css('color'))};">&nbsp;</span></li>
+    <li>Background-color:&nbsp;${colorBG}  <span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid #000;background-color: ${colorBG};">&nbsp;</span></li>
+    <li>Color:&nbsp;${color} <span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid ${color};background-color: ${color};">&nbsp;</span></li>
     <li>Position:&nbsp;${$(el).css('position')}</li>
     <li>Transform:&nbsp;${$(el).css('transform')}</li>
     <li>Opacity:&nbsp;${$(el).css('opacity')}</li>
@@ -379,19 +435,20 @@ function getHoverCss(el) {
 
 //get hover property
 function getHoverCssChange(el) {
-  let getProp = window.getComputedStyle(el, null)
+  let colorBG = DetecBGColor(el)
+  let color = DetecColor(el)
   let hoverPropertyChange = `
   <div class="hover-change-ex seperate-ex" style="max-width: 0; padding: 0;">
   <h4>Font Attribute</h4>
   <ul>
-    <li>Background-color:&nbsp;${ConvertRGBToHex($(el).css('background-color'))}  <span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid #000;background-color: ${ConvertRGBToHex($(el).css('background-color'))};">&nbsp;</span></li>
-    <li>Color:&nbsp;${ConvertRGBToHex($(el).css('color'))} <span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid ${ConvertRGBToHex($(el).css('color'))};background-color: ${ConvertRGBToHex($(el).css('color'))};">&nbsp;</span></li>
-    <li>Font-size:&nbsp;${getProp.getPropertyValue('font-size')}</li>
-        <li>Font-weight:&nbsp;${getProp.getPropertyValue('font-weight')}</li>
-        <li>Font-family:&nbsp;${getProp.getPropertyValue('font-family')}</li>
-        <li>Line-height:&nbsp;${getProp.getPropertyValue('line-height')}</li>
-        <li>Text-align:&nbsp;${getProp.getPropertyValue('text-align')}</li>
-        <li>Letter-spacing:&nbsp;${getProp.getPropertyValue('letter-spacing')}</li>
+    <li>Background-color:&nbsp;${colorBG}  <span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid #000;background-color: ${colorBG};">&nbsp;</span></li>
+    <li>Color:&nbsp;${color} <span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid ${color};background-color: ${color};">&nbsp;</span></li>
+    <li>Font-size:&nbsp;${$(el).css('font-size')}</li>
+        <li>Font-weight:&nbsp;${$(el).css('font-weight')}</li>
+        <li>Font-family:&nbsp;${$(el).css('font-family')}</li>
+        <li>Line-height:&nbsp;${$(el).css('line-height')}</li>
+        <li>Text-align:&nbsp;${$(el).css('text-align')}</li>
+        <li>Letter-spacing:&nbsp;${$(el).css('letter-spacing')}</li>
     </ul>
   </div>`
   return hoverPropertyChange
@@ -612,7 +669,8 @@ function WonderTest() {
     var elements = this.GetAllElements(document.body);
     for (var i = 0; i < elements.length; i++) {
       if($(elements[i]).is('a.ps-as')) {
-        $($(elements[i]).addClass('ex-d-none'))
+        $(elements[i]).addClass('ex-d-none')
+        $(elements[i]).parent().addClass('pointer-ex')
       }
       if(!$(elements[i]).is('.open-ex, .open-ex button')) {
         elements[i].addEventListener("click", EventClick, false);
@@ -634,7 +692,8 @@ function WonderTest() {
     }
     for (var i = 0; i < elements.length; i++) {
       if($(elements[i]).hasClass('ex-d-none')) {
-        $($(elements[i]).removeClass('ex-d-none'))
+        $(elements[i]).removeClass('ex-d-none')
+        $(elements[i]).parent().removeClass('pointer-ex')
       }
       elements[i].removeEventListener("click", EventClick, false);
       elements[i].removeEventListener("mouseover", EventHover, false);
@@ -647,7 +706,7 @@ WonderTest.prototype.Enable = function () {
   let divClose = document.createElement('div')
   $(divClose).addClass('open-ex')
   divClose.innerHTML = `
-  <button title="Good Bye!!" class="btnGlobal">Exit Tool</button>`
+  <button class="btnGlobal">Exit Tool</button>`
   document.body.appendChild(divClose)
   this.AddEventListeners();
 }
@@ -665,10 +724,6 @@ if (WonderTest.haveEventListeners === false) {
 } else {
   WonderTest.Disable()
 }
-// click button show property hover
-// $("body").on('click', '#hoverEffect', () => {
-//   $('.hover-ex').css('display', 'block');
-// })
 $("body").on('click', '#btnClose', () => {
   let popupNew = document.getElementById('popup-ex')
   if (popupNew != null) {
@@ -686,10 +741,5 @@ $("body").on('click', '#btnClose', () => {
 $('.btnGlobal').click(function (e) {
   WonderTest.Disable()
 })
-// event dropdown change
-// $("body").on('change', '.select-state', function (e) {
-//   btnEditClick(e)
-// })
-
 //tooltip css
 document.onkeydown = WonderKeyMap;

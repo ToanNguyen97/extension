@@ -214,3 +214,6 @@
   transform: scale(1.2);
   background-color: #000000c9;
 }
+.pointer-ex {
+  cursor: pointer;
+}
