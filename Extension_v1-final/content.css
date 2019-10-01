@@ -211,7 +211,7 @@
   color: white;
   cursor: pointer;
   font-size: 10px;
-  padding: 5px;
+  padding: 5px 10px;
 }
 .open-ex button:hover{
   transform: scale(1.2);
