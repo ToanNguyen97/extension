@@ -228,7 +228,7 @@ function CreateBodyText() {
 function AllCardBasic() {
   let cardBasic = document.createElement('div')
   $(cardBasic).addClass('append-conent')
-  cardBasic.innerHTML =`<h2>What is Lor<a href="#">em I</a>psum?</h2>
+  cardBasic.innerHTML = `<h2>What is Lor<a href="#">em I</a>psum?</h2>
   <p><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
   <h3>What is Lor<a href="#">em I</a>psum?</h3>
   <p><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
@@ -456,11 +456,11 @@ function getHoverCssChange(el) {
 
 function EventClick(e) {
   let el = e.target
-   // fix tam hover
-   var elements = WonderTest.GetAllElements(document.body);
-   for (var i = 0; i < elements.length; i++) {
-     elements[i].removeEventListener("mouseover", EventHover, false);
-   }
+  // fix tam hover
+  var elements = WonderTest.GetAllElements(document.body);
+  for (var i = 0; i < elements.length; i++) {
+    elements[i].removeEventListener("mouseover", EventHover, false);
+  }
   if (!$(e.target).is('.popup-font, .popup-font *, .open-ex, .open-ex button')) {
     e.preventDefault()
     let getProp = window.getComputedStyle(el, null)
@@ -517,14 +517,16 @@ function EventClick(e) {
     document.body.appendChild(newEl)
     let styleNew = document.getElementById('popup-detail')
     let cardContent = document.getElementsByClassName('card-content')
-    $(styleNew).css('height', 118 + cardContent[0].clientHeight + 10 + 'px')
+    // $(styleNew).css('height', '360px')
+    $(styleNew).css('height', 128 + cardContent[0].clientHeight + 10 + 'px')
     if ($(el).css('cursor') == 'pointer') {
       $(styleNew).css('top', $(el).offset().top + 'px')
-      
+
     } else {
-      $(styleNew).css('top',$(el).innerHeight() + $(el).offset().top + 'px')
+      $(styleNew).css('top', $(el).innerHeight() + $(el).offset().top + 'px')
       $('.hover-ex').css('display', 'none')
     }
+
     // $(styleNew).css('top', $(el).offset().top + 'px')
     $(styleNew).css('left', $(el).offset().left + 'px')
     $('.font-ex').after(getHoverCss(el))
@@ -538,14 +540,20 @@ function EventClick(e) {
     setTimeout(() => {
       // getHoverCssChange(el)
       $('.hover-change-ex').remove()
-      $('.font-ex').after(getHoverCssChange(el))
-      setTimeout(() => {
-        $('.hover-change-ex').css({
-          'max-width': '',
-          'padding': ''
-        })
-      }, 50)
-    }, 250)
+      if( WonderTest.eleHasFontSize.includes($(el)[0].nodeName) ){
+        $('.font-ex').after(getHoverCssChange(el))
+        setTimeout(() => {
+          $('.hover-change-ex').css({
+            'max-width': '',
+            'padding': ''
+          })
+        }, 50)
+      }
+      //check if IMG
+      // if ($(el)[0].nodeName == 'IMG') {
+      //   $('.hover-change-ex').css('display', 'none')
+      // }
+    }, 500)
 
     pastEl = el // gán el click trước để remove  .card-ex-edit, .card-ex-edit*
   }
@@ -555,7 +563,7 @@ function EventClick(e) {
   //   WonderTest.Disable();
   // })
   let addEF = document.getElementById('popup-detail')
-  if($(addEF).length > 0) {
+  if ($(addEF).length > 0) {
     EffectMoveBox(addEF)
   }
   e.stopPropagation()
@@ -593,7 +601,7 @@ function EventHover(e) {
 }
 
 function btnEditClick(e) {
-  if ( $(e.target).is('.popup-font #editCotent img')) { //$(e.target).is('.select-state') ||
+  if ($(e.target).is('.popup-font #editCotent img')) { //$(e.target).is('.select-state') ||
     Ramdomcontent()
   }
 }
@@ -644,6 +652,9 @@ function WonderTest() {
     }
     return elements;
   }
+  this.eleHasFontSize = ['H1','H2','H3','H4','H5','H6', 'A', 'P' ]
+  this.eleDontHasFontSize = ['IMG', 'BG']
+  this.eleDontHas = ['DIV']
   this.haveEventListeners = false;
   this.contentOld = ''
   this.valueHexa = new Array(
@@ -668,11 +679,16 @@ function WonderTest() {
     var document = GetCurrentDocument();
     var elements = this.GetAllElements(document.body);
     for (var i = 0; i < elements.length; i++) {
+<<<<<<< HEAD
       if($(elements[i]).is('a.ps-as')) {
         $(elements[i]).addClass('ex-d-none')
         $(elements[i]).parent().addClass('pointer-ex')
+=======
+      if ($(elements[i]).is('a.ps-as')) {
+        $($(elements[i]).addClass('ex-d-none'))
+>>>>>>> master
       }
-      if(!$(elements[i]).is('.open-ex, .open-ex button')) {
+      if (!$(elements[i]).is('.open-ex, .open-ex button')) {
         elements[i].addEventListener("click", EventClick, false);
         elements[i].addEventListener("mouseover", EventHover, false);
       }
@@ -691,9 +707,14 @@ function WonderTest() {
       $(exPopupHover).remove()
     }
     for (var i = 0; i < elements.length; i++) {
+<<<<<<< HEAD
       if($(elements[i]).hasClass('ex-d-none')) {
         $(elements[i]).removeClass('ex-d-none')
         $(elements[i]).parent().removeClass('pointer-ex')
+=======
+      if ($(elements[i]).hasClass('ex-d-none')) {
+        $($(elements[i]).removeClass('ex-d-none'))
+>>>>>>> master
       }
       elements[i].removeEventListener("click", EventClick, false);
       elements[i].removeEventListener("mouseover", EventHover, false);
@@ -711,7 +732,7 @@ WonderTest.prototype.Enable = function () {
   this.AddEventListeners();
 }
 WonderTest.prototype.Disable = function () {
-  if($('.open-ex').length > 0) {
+  if ($('.open-ex').length > 0) {
     $('.open-ex').remove()
   }
   this.RemoveEventListeners();
@@ -733,7 +754,7 @@ $("body").on('click', '#btnClose', () => {
   }
   var elements = WonderTest.GetAllElements(document.body);
   for (var i = 0; i < elements.length; i++) {
-    if(!$(elements[i]).is('.open-ex, .open-ex button')) {
+    if (!$(elements[i]).is('.open-ex, .open-ex button')) {
       elements[i].addEventListener("mouseover", EventHover, false);
     }
   }
