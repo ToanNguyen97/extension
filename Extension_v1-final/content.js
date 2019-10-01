@@ -371,9 +371,48 @@ function DetecBGColor(el) {
     return ConvertRGBToHex($(el).css('background-color'))
   }
 }
-
+function DetecBoxShadow(el) {
+  let rgba = el.substr(el.indexOf('r'), el.indexOf(')') + 1)
+  let position = el.substr(el.indexOf(')') + 1, el.length - el.indexOf('r'))
+  if(rgba.match(/rgba/)) {
+    rgba =  ConvertRGBAToHex(rgba)
+  } else if(rgba.match(/rgb/)) {
+    rgba = ConvertRGBToHex(rgba)
+  }
+  return {bg: rgba, pos: position}
+}
+function DetecBorder(el) {
+  if(!el.includes('none')) {
+  let rgba = el.substring(el.indexOf('r'), el.indexOf(')') + 1)
+  if(rgba.match(/rgba/)) {
+    rgba =  ConvertRGBAToHex(rgba)
+  } else if(rgba.match(/rgb/)) {
+    rgba = ConvertRGBToHex(rgba)
+  }
+  let px = el.substring(0, el.indexOf('x') + 1)
+  let style = el.substring(el.indexOf('x') + 1, el.indexOf('r'))
+  let li =  '<li>Border:&nbsp;'+ px +' '+ rgba + ' ' + style +'</li>'
+  return li
+  }
+  return ''
+}
+function ConvertMaxtrixToTransform(el) {
+  trans = $(el).css('transform')
+  numberPattern = /-?\d+\.?\d+|\d+/g
+  values = trans.match( numberPattern );
+  let arrStyle = ['ScaleX', 'SkewY', 'SkewX', 'ScaleY', 'TranslateX', 'TranslateY']
+  for(let item = 0; item < values.length ; item++) {
+    if(values[item] != 0) {
+      values[item] = arrStyle[item] + ': ' + values[item]
+    }
+  }
+  values = values.filter(item => {
+    return item != 0;
+  })
+  return values
+}
 function createAttBackground(getProp, image) {
-  let colorBG = DetecBGColor(el)
+  let colorBG = DetecBGColor(image)
   let background = `<div class="background-ex seperate-ex">
   <h4>Background Attribute</h4>
   <ul>
@@ -403,14 +442,15 @@ function createAttImage(getProp, image) {
 }
 
 function createNormalProperty(getProp) {
+  let BoxShadow = DetecBoxShadow(getProp.getPropertyValue('box-shadow'))
   let normalProperty = `<div class="normal-ex seperate-ex">
   <h4>Normal Attribute</h4>
   <ul>
     <li>Width:&nbsp;${getProp.getPropertyValue('width')}</li>
     <li>Height:&nbsp;${getProp.getPropertyValue('height')}</li>
-    <li>Border:&nbsp;${getProp.getPropertyValue('border')}</li>
-    <li>Border-radius:&nbsp;${getProp.getPropertyValue('border-radius')}</li>
-    <li>Box-shadow:&nbsp;${getProp.getPropertyValue('box-shadow')}</li>
+    ${DetecBorder(getProp.getPropertyValue('border'))}
+    ${getProp.getPropertyValue('border-radius') !== '0px'?`<li>Border-radius:&nbsp;${getProp.getPropertyValue('border-radius')}</li>`:''}
+    <li>Box-shadow:&nbsp;${BoxShadow.bg + BoxShadow.pos }<span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid ${ BoxShadow.bg == '#FFFFFF'? 'black': BoxShadow.bg };background-color: ${BoxShadow.bg};">&nbsp;</span></li></li>
   </ul>
   </div>`
   return normalProperty
@@ -426,8 +466,8 @@ function getHoverCss(el) {
     <li>Background-color:&nbsp;${colorBG}  <span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid #000;background-color: ${colorBG};">&nbsp;</span></li>
     <li>Color:&nbsp;${color} <span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid ${color};background-color: ${color};">&nbsp;</span></li>
     <li>Position:&nbsp;${$(el).css('position')}</li>
-    <li>Transform:&nbsp;${$(el).css('transform')}</li>
     <li>Opacity:&nbsp;${$(el).css('opacity')}</li>
+    ${$(el).css('transform')!= 'none'? 'trannsform:' + ConvertMaxtrixToTransform(el):''}
     </ul>
   </div>`
   return hoverProperty
