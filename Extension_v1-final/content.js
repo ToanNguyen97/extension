@@ -760,7 +760,7 @@ function WonderTest() {
   }
   this.RemoveEventListeners = function () {
     var document = GetCurrentDocument();
-    var elements = this.GetAllElements(document.body);
+    var elements = this.GetAllElements(document.body)
     let elHighLight = $(elements).find('.highlight-ex')
     let exPopup = $(elements).find('#popup-ex')
     let exPopupHover = $(elements).find('#popup-hover')
@@ -790,6 +790,7 @@ WonderTest.prototype.Enable = function () {
   this.AddEventListeners();
 }
 WonderTest.prototype.Disable = function () {
+  chrome.storage.local.set({Clicked: true}, function() {})
   if ($('.open-ex').length > 0) {
     $('.open-ex').remove()
   }
@@ -804,6 +805,7 @@ if (WonderTest.haveEventListeners === false) {
   WonderTest.Disable()
 }
 $("body").on('click', '#btnClose', () => {
+
   let popupNew = document.getElementById('popup-ex')
   if (popupNew != null) {
     popupNew.remove()
@@ -831,6 +833,7 @@ $("body").on('click', '#changePosition img', () => {
 $('.btnGlobal').click(function (e) {
   WonderTest.Disable()
 })
+
 
 //tooltip css
 document.onkeydown = WonderKeyMap;

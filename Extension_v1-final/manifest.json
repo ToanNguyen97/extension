@@ -12,7 +12,8 @@
     "activeTab",
     "tabs",
     "https://*.com/*",
-    "notifications"
+    "notifications",
+    "storage"
   ],
   "background": { "page":"background.html" },
   "icons": {
