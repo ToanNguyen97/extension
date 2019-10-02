@@ -362,7 +362,7 @@ function Ramdomcontent() {
       ChangeForIMGTag(randomNumber,content)
     }
   }
-  $('#popup-hover').remove()
+  // $('#popup-hover').remove()
 }
 
 function DetecColor(el) {
@@ -810,7 +810,7 @@ $("body").on('click', '#btnClose', () => {
   if (popupNew != null) {
     popupNew.remove()
     $(pastEl).removeClass('highlight-ex')
-    $('#popup-hover').remove()
+    // $('#popup-hover').remove()
   }
   var elements = WonderTest.GetAllElements(document.body);
   for (var i = 0; i < elements.length; i++) {
