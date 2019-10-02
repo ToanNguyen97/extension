@@ -29,15 +29,11 @@ function ConvertRGBToHex(str) {
   if (hexStr == "#00000000") {
     hexStr = "#FFFFFF";
   }
-  //hexStr = '<span style="border: 1px solid #000000 !important;width: 8px !important;height: 8px !important;display: inline-block !important;background-color:'+ hexStr +' !important;"></span> ' + hexStr;
-
   return hexStr;
 }
 function ConvertRGBAToHex(rgba) {
   let sep = rgba.indexOf(",") > -1 ? "," : " ";
   rgba = rgba.substr(5).split(")")[0].split(sep);
-                
-  // Strip the slash if using space-separated syntax
   if (rgba.indexOf("/") > -1)
     rgba.splice(3,1);
 
@@ -76,6 +72,7 @@ function EffectMoveBox(el) {
   let x = 0
   let y = 0
   let mousedown = false
+  // let flag = false
   let parents = $(el).parents('body')
   el.addEventListener('mousedown', function (e) {
     mousedown = true
@@ -87,9 +84,14 @@ function EffectMoveBox(el) {
     mousedown = false
   }, true)
   $(parents).mousemove(function (e) {
-    // Is mouse pressed 
     if (mousedown) {
-      // Now we calculate the difference upwards 
+      // if(flag == false) {
+      //   console.log('asdasd')
+      //   $(el).css('right', '')
+      //   $(el).css('left', $(el).offset().left - $(styleNew).innerWidth() + 'px')
+      //   flag = true
+      // }
+      $(el).css('right', '')
       el.style.left = e.clientX + x + 'px'
       el.style.top = e.clientY + y + 'px'
     }
@@ -192,14 +194,16 @@ function ChangeForPTag(num, el) {
   }
 }
 
-function ChangeForIMGTag(el) {
+function ChangeForIMGTag(num, el) {
   let arrayImage = [
     'https://picsum.photos/id/125/900/300',
     'https://picsum.photos/id/610/200/300',
     'https://picsum.photos/id/431/2000/500',
     'https://picsum.photos/id/321/2000/2000',
+    'https://picsum.photos/id/215/375/667'
+    
   ]
-  let imgRamdom = arrayImage[Math.floor(Math.random() * arrayImage.length)]
+  let imgRamdom = arrayImage[num]
   if ($(el)[0].nodeName == 'IMG') {
     $(el)[0].src = imgRamdom
   } else {
@@ -305,7 +309,11 @@ function AllCardBasic() {
 
 function Ramdomcontent() {
   let selected = $('.select-state')
-  let randomNumber = Math.floor(Math.random() * 4 + 1);
+  let randomNumber = Math.floor(Math.random() * 4 + 1)
+  while(randomNumber == WonderTest.countEl) {
+    randomNumber = Math.floor(Math.random() * 4 + 1)
+  }
+  WonderTest.countEl = randomNumber
   let content = $('body').find('.highlight-ex')
   let arrH = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'SPAN']
   if (arrH.includes($(content)[0].nodeName)) {
@@ -350,7 +358,7 @@ function Ramdomcontent() {
         $(content)[0].src = WonderTest.contentOld
       }
     } else {
-      ChangeForIMGTag(content)
+      ChangeForIMGTag(randomNumber,content)
     }
   }
   $('#popup-hover').remove()
@@ -391,7 +399,7 @@ function DetecBorder(el) {
   }
   let px = el.substring(0, el.indexOf('x') + 1)
   let style = el.substring(el.indexOf('x') + 1, el.indexOf('r'))
-  let li =  '<li>Border:&nbsp;'+ px +' '+ rgba + ' ' + style +'</li>'
+  let li =  '<li>Border:&nbsp;'+ px +' '+ rgba + ' ' + style +`<span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid ${ rgba == '#FFFFFF'? 'black': rgba };background-color: ${rgba};">&nbsp;</span>`+'</li>'
   return li
   }
   return ''
@@ -441,24 +449,26 @@ function createAttImage(getProp, image) {
   return imageProperty
 }
 
-function createNormalProperty(getProp) {
-  let BoxShadow = DetecBoxShadow(getProp.getPropertyValue('box-shadow'))
+function createNormalProperty(el) {
+  let BoxShadow = DetecBoxShadow($(el).css('box-shadow'))
   let normalProperty = `<div class="normal-ex seperate-ex">
   <h4>Normal Attribute</h4>
   <ul>
-    <li>Width:&nbsp;${getProp.getPropertyValue('width')}</li>
-    <li>Height:&nbsp;${getProp.getPropertyValue('height')}</li>
-    ${DetecBorder(getProp.getPropertyValue('border'))}
-    ${getProp.getPropertyValue('border-radius') !== '0px'?`<li>Border-radius:&nbsp;${getProp.getPropertyValue('border-radius')}</li>`:''}
-    <li>Box-shadow:&nbsp;${BoxShadow.bg + BoxShadow.pos }<span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid ${ BoxShadow.bg == '#FFFFFF'? 'black': BoxShadow.bg };background-color: ${BoxShadow.bg};">&nbsp;</span></li></li>
-  </ul>
+    <li>Width:&nbsp;${$(el).css('width')}</li>
+    <li>Height:&nbsp;${$(el).css('height')}</li>
+    ${DetecBorder($(el).css('border'))}
+    ${$(el).css('border-radius') !== '0px'?`<li>Border-radius:&nbsp;${$(el).css('border-radius')}</li>`:''}
+    ${$(el).css('box-shadow') != 'none'?`<li>Box-shadow:&nbsp;${BoxShadow.bg + BoxShadow.pos }<span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid ${ BoxShadow.bg == '#FFFFFF'? 'black': BoxShadow.bg };background-color: ${BoxShadow.bg};">&nbsp;</span></li></li>`: ''}
+    ${$(el).css('transform')!= 'none'? '  <li>trannsform:&nbsp;' + ConvertMaxtrixToTransform(el)+'</li>':''}
+    </ul>
   </div>`
   return normalProperty
 }
-
+// get hover for element
 function getHoverCss(el) {
   let colorBG = DetecBGColor(el)
   let color = DetecColor(el)
+  let BoxShadow = DetecBoxShadow($(el).css('box-shadow'))
   let hoverProperty = `
   <div class="hover-ex seperate-ex">
   <h4>Hover Attribute</h4>
@@ -467,18 +477,19 @@ function getHoverCss(el) {
     <li>Color:&nbsp;${color} <span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid ${color};background-color: ${color};">&nbsp;</span></li>
     <li>Position:&nbsp;${$(el).css('position')}</li>
     <li>Opacity:&nbsp;${$(el).css('opacity')}</li>
+    ${$(el).css('box-shadow') != 'none'?`<li>Box-shadow:&nbsp;${BoxShadow.bg + BoxShadow.pos }<span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid ${ BoxShadow.bg == '#FFFFFF'? 'black': BoxShadow.bg };background-color: ${BoxShadow.bg};">&nbsp;</span></li></li>`: ''}
     ${$(el).css('transform')!= 'none'? '  <li>trannsform:&nbsp;' + ConvertMaxtrixToTransform(el)+'</li>':''}
     </ul>
   </div>`
   return hoverProperty
 }
 
-//get hover property
+//get font size for element
 function getHoverCssChange(el) {
   let colorBG = DetecBGColor(el)
   let color = DetecColor(el)
   let hoverPropertyChange = `
-  <div class="hover-change-ex seperate-ex" style="max-width: 0; padding: 0;">
+  <div class="hover-change-ex seperate-ex">
     <h4>Font Attribute</h4>
     <ul>
       <li>Background-color:&nbsp;${colorBG}  <span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid #000;background-color: ${colorBG};">&nbsp;</span></li>
@@ -494,7 +505,38 @@ function getHoverCssChange(el) {
   </div>`
   return hoverPropertyChange
 }
-
+function getColToChange(el) {
+  let obj = {
+    valid: false
+  }
+  if($(el)[0].hasChildNodes()) {
+    let elRow
+    let arrEl = WonderTest.GetAllElements($(el)[0])
+    for(let i = 0; i < arrEl.length; i++) {
+      if(arrEl[i].className.indexOf("row") != -1) {
+        elRow = arrEl[i]
+        break;
+      }
+    }
+    if($(elRow).length > 0 && $(elRow)[0].hasChildNodes()) {
+      WonderTest.arrCol = []
+      for(let item of $(elRow)[0].childNodes) {
+        let a = $(item)[0].className
+        if( $(item)[0].className != undefined && ( $(item)[0].className.match(/\bcol-\w+-\d+/) || $(item)[0].className.match(/\bcol-\d+/))) {
+          WonderTest.arrCol.push(item)
+        }
+      }
+      if(WonderTest.arrCol.length > 0 && WonderTest.arrCol.length == 2) {
+        return obj = {
+          valid: true,
+          col1: WonderTest.arrCol[0],
+          col2: WonderTest.arrCol[1]
+        }
+      }
+    }
+  }
+  return obj
+}
 function EventClick(e) {
   let el = e.target
   // fix tam hover
@@ -521,13 +563,15 @@ function EventClick(e) {
       WonderTest.contentOld = $(el)[0].innerText
     }
     let newEl = document.createElement('div')
+    let hasTwoCol = getColToChange(el) // check to change position 2 col
     newEl.setAttribute('id', 'popup-ex')
-    newEl.innerHTML = `<div class="card-ex popup-font" id="popup-detail" >
+    newEl.innerHTML = `<div class="card-ex popup-font" id="popup-detail">
     <div class="card-des">
       <div class="tag-element">
         <h4>${$(el).css('background-image') != 'none'? $(el)[0].nodeName + ' - BG': $(el)[0].nodeName}</h4>
       </div>
       <div>
+        ${hasTwoCol.valid == true? `<button id="changePosition"><img src="${chrome.runtime.getURL('images/update.png')}"/></button>`:`
         <button id="editCotent"><img src="${chrome.runtime.getURL('images/update.png')}"/></button>
         <select class="select-state">
         <option value="2">Random</option>
@@ -535,80 +579,60 @@ function EventClick(e) {
         <option value="1">Refesh</option>
         <option value="4">All card basic</option>
         </select>
-      </div>
+        `}
+        </div>
       <div class="btn-element">
-  <button id="btnClose"><img src="${chrome.runtime.getURL('images/close_icon.png')}"/></button>
+      <button id="btnClose"><img src="${chrome.runtime.getURL('images/close_icon.png')}"/></button>
       </div>
     </div>
     <div class="card-content">
-      <div class="font-ex seperate-ex">
-        <h4>Font Attribute</h4>
-        <ul>
-        <li>Font-size:&nbsp;${getProp.getPropertyValue('font-size')}</li>
-        <li>Font-weight:&nbsp;${getProp.getPropertyValue('font-weight')}</li>
-        <li>Font-family:&nbsp;${getProp.getPropertyValue('font-family')}</li>
-        <li>Line-height:&nbsp;${getProp.getPropertyValue('line-height')}</li>
-        <li>Text-align:&nbsp;${getProp.getPropertyValue('text-align')}</li>
-        <li>Letter-spacing:&nbsp;${getProp.getPropertyValue('letter-spacing')}</li>
-        <li>Opacity:&nbsp;${$(el).css('opacity')}</li>
-        </ul>
-      </div>
-      ${ $(el)[0].nodeName == 'IMG'? createAttImage(getProp, $(el)[0]): ($(el).css('background-image') != 'none' ? createAttBackground(getProp, $(el)[0]): createNormalProperty(getProp))}
+      ${($(el).css('cursor') != 'pointer' && WonderTest.eleHasFontSize.includes($(el)[0].nodeName ))? getHoverCssChange(el) :''}
+      ${ $(el)[0].nodeName == 'IMG'? createAttImage(getProp, $(el)[0]): ($(el).css('background-image') != 'none' ? createAttBackground(getProp, $(el)[0]): createNormalProperty($(el)[0]))}
     </div>
     </div>`
     document.body.appendChild(newEl)
     let styleNew = document.getElementById('popup-detail')
     let cardContent = document.getElementsByClassName('card-content')
-    // $(styleNew).css('height', '360px')
-    $(styleNew).css('height', 158 + cardContent[0].clientHeight + 10 + 'px')
-
-    if($(el).offset().top >= 8300 ){
-      $(styleNew).css('top', -370 + $(el).offset().top - $(el).innerHeight() + 'px')
-    }else {
-      if ($(el).css('cursor') == 'pointer') {
-        $(styleNew).css('top', $(el).offset().top + 'px')
-  
-      } else {
-        $(styleNew).css('top', $(el).innerHeight() + $(el).offset().top + 'px')
-        $('.hover-ex').css('display', 'none')
-      }
-    }
-
-    // $(styleNew).css('top', $(el).offset().top + 'px')
-    $(styleNew).css('left', $(el).offset().left + 'px')
-    $('.font-ex').after(getHoverCss(el))
-    $('.hover-ex').css('max-width', '290px')
-    $('.hover-ex').css('padding-right', '15px')
-    $('.hover-ex').css('padding-left', '15px')
+    let cardDes = document.getElementsByClassName('card-des')
+    $(styleNew).css('height', $(cardDes[0]).outerHeight() + $(cardContent[0]).outerHeight() + 10 + 'px')
     if ($(el).css('cursor') != 'pointer') {
-      $('.hover-ex').css('display', 'none')
-    }
-    //-----------------TH2------------
-    setTimeout(() => {
-      // getHoverCssChange(el)
-      $('.hover-change-ex').remove()
-      if( WonderTest.eleHasFontSize.includes($(el)[0].nodeName) ){
-        $('.font-ex').after(getHoverCssChange(el))
-        setTimeout(() => {
-          $('.hover-change-ex').css({
-            'max-width': '',
-            'padding': ''
-          })
-        }, 50)
+      if(e.clientX/$(window).innerWidth() > 0.5) {
+        $(styleNew).css('right', $(window).innerWidth() - $(el).offset().left + 'px')
+      } else {
+        $(styleNew).css('left', $(el).offset().left + $(el).innerWidth() + 'px')     
       }
-      //check if IMG
-      // if ($(el)[0].nodeName == 'IMG') {
-      //   $('.hover-change-ex').css('display', 'none')
-      // }
-    }, 500)
-
+      $('.hover-ex').css('display', 'none')
+      if(e.clientY/$(window).innerHeight() > 0.5) {
+        $(styleNew).css('top', $(el).offset().top - $(styleNew).innerHeight() + 'px')
+      } else {
+        $(styleNew).css('top', $(el).offset().top + $(el).innerHeight() + 'px')     
+      }
+    } else {
+      if(e.clientY/$(window).innerHeight() > 0.5) {
+        $(styleNew).css('top', $(el).offset().top - $(styleNew).innerHeight() + $(el).innerHeight() + 'px')
+      } else {
+        $(styleNew).css('top',$(el).offset().top + 'px')
+      }
+      $(styleNew).css('left',$(el).offset().left + 'px')
+      $('.card-content').append(getHoverCss(el))
+      $('.hover-ex').css('max-width', '290px')
+      $('.hover-ex').css('padding-right', '15px')
+      $('.hover-ex').css('padding-left', '15px')
+      $(styleNew).css('height', $(cardDes[0]).outerHeight() + $(cardContent[0]).outerHeight() + 10 + 'px')
+      setTimeout(() => {
+        $('.hover-change-ex').remove()
+        if( WonderTest.eleHasFontSize.includes($(el)[0].nodeName) ){
+          $('.card-content').append(getHoverCssChange(el))
+          $(styleNew).css('height', $(cardDes[0]).outerHeight() + $(cardContent[0]).outerHeight() + 10 + 'px')
+        } else {
+          $('.normal-ex').remove()
+          $('.card-content').append(createNormalProperty($(el)[0]))
+        }
+      }, 500)
+    }
     pastEl = el // gán el click trước để remove  .card-ex-edit, .card-ex-edit*
   }
   $('#editCotent').click(btnEditClick(e))
-  $('#hoverEffect').click(btnHoverClick(pastEl))
-  // $('#btnClose').click(function (e) {
-  //   WonderTest.Disable();
-  // })
   let addEF = document.getElementById('popup-detail')
   if ($(addEF).length > 0) {
     EffectMoveBox(addEF)
@@ -628,8 +652,8 @@ function EventHover(e) {
     hoverEl.setAttribute('id', 'popup-hover')
     hoverEl.innerHTML = `
     <div class="hover-element">
-      <h4>${$(el).css('background-image') != 'none'? $(el)[0].nodeName + ' - BG': $(el)[0].nodeName}</h4>
-      <p class="width-box">${getProp.getPropertyValue('width').substring(0, getProp.getPropertyValue('width').indexOf('px'))}x${getProp.getPropertyValue('height').substring(0,getProp.getPropertyValue('height').indexOf('px'))}</p>
+      <h4>${$(el).css('background-image') != 'none'? $(el)[0].nodeName + ' - BG': $(el)[0].nodeName}${$(el).hasClass('container')== true? '<span style="color: blue;font-size: 15px;"> .container</span>':''}</h4>
+      <p class="width-box">${getProp.getPropertyValue('width').substring(0, getProp.getPropertyValue('width').indexOf('px'))+ ' x ' + getProp.getPropertyValue('height').substring(0,getProp.getPropertyValue('height').indexOf('px'))}</p>
     </div>`
     document.body.appendChild(hoverEl)
     let styleHover = document.getElementById('popup-hover')
@@ -649,12 +673,6 @@ function EventHover(e) {
 
 function btnEditClick(e) {
   if ($(e.target).is('.popup-font #editCotent img')) { //$(e.target).is('.select-state') ||
-    Ramdomcontent()
-  }
-}
-
-function btnHoverClick(e) {
-  if ($(e.target).is('.popup-font #editCotent')) {
     Ramdomcontent()
   }
 }
@@ -699,11 +717,13 @@ function WonderTest() {
     }
     return elements;
   }
-  this.eleHasFontSize = ['H1','H2','H3','H4','H5','H6', 'A', 'P','SPAN' ]
+  this.eleHasFontSize = ['H1','H2','H3','H4','H5','H6', 'A', 'P','SPAN', 'LI', 'STRONG' ]
   this.eleDontHasFontSize = ['IMG', 'BG']
   this.eleDontHas = ['DIV']
-  this.haveEventListeners = false;
+  this.haveEventListeners = false
+  this.countEl = 0
   this.contentOld = ''
+  this.ArrCol = new Array()
   this.valueHexa = new Array(
     '0',
     '1',
@@ -756,7 +776,7 @@ function WonderTest() {
       elements[i].removeEventListener("click", EventClick, false);
       elements[i].removeEventListener("mouseover", EventHover, false);
     }
-    this.haveEventListeners = false;
+    // this.haveEventListeners = false;
   }
 }
 
@@ -796,8 +816,20 @@ $("body").on('click', '#btnClose', () => {
     }
   }
 })
+$("body").on('click', '#changePosition img', () => {
+  if(WonderTest.arrCol.length > 0 && WonderTest.arrCol.length == 2) {
+    if($(WonderTest.arrCol[0]).hasClass('order-1')){
+      $(WonderTest.arrCol[0]).removeClass('order-1')
+      $(WonderTest.arrCol[1]).addClass('order-1')
+    } else {
+      $(WonderTest.arrCol[0]).addClass('order-1')
+      $(WonderTest.arrCol[1]).removeClass('order-1')
+    }
+  }
+})
 $('.btnGlobal').click(function (e) {
   WonderTest.Disable()
 })
+
 //tooltip css
 document.onkeydown = WonderKeyMap;

@@ -55,7 +55,7 @@
 }
 .card-content {
   display: flex;
-  padding: 20px 10px 0;
+  padding: 10px;
   color: black;
   /* height: 200px; */
 }
@@ -82,7 +82,7 @@
 .seperate-ex {
   max-width: 280px;
   /* border-bottom: 1px dashed orange; */
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
   border-right: 1px solid orange;
   padding-right: 15px;
   padding-left: 15px;
@@ -93,6 +93,7 @@
 .seperate-ex ul {
   list-style: none;
   position: relative;
+  margin-bottom: 0;
 }
 
 .seperate-ex ul li::before {
@@ -106,8 +107,12 @@
   margin-top: 7px;
   position: absolute;
 }
+.seperate-ex ul li:last-child {
+  margin-bottom: 0;
+}
 
 .seperate-ex:last-child {
+  margin-bottom: 0;
   border-right: none;
 }
 .tag-element {
@@ -162,11 +167,11 @@
 }
 
 .hover-element h4 {
+  font-size: 18px;
   display: flex;
   align-items: center;
   padding: 5px 10px;
   margin: 0;
-  font-size: 20px;
 }
 
 .width-box {
@@ -186,15 +191,15 @@
 #btnClose img {
   width: 20px;
 }
-#editCotent {
+#editCotent, #changePosition {
   background-color: transparent;
   transition: .3s all ease;
 }
-#editCotent:hover {
+#editCotent:hover, #changePosition:hover {
   transform: scale(1.2);
 }
 
-#editCotent img {
+#editCotent img, #changePosition img {
   width: 25px;
 }
 .ex-d-none {
