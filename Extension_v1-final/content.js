@@ -833,7 +833,6 @@ $("body").on('click', '#changePosition img', () => {
 $('.btnGlobal').click(function (e) {
   WonderTest.Disable()
 })
-
-
 //tooltip css
 document.onkeydown = WonderKeyMap;
+
