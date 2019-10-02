@@ -27,6 +27,7 @@
 }
 
 .card-des {
+  font-family: Arial, Helvetica, sans-serif;
   color: white;
   padding: 0 15px 7px;
   /* height: 50px; */
@@ -36,24 +37,29 @@
   border-bottom: 1px dashed black;
 }
 .tag-element h4 {
+  font-family: Arial, Helvetica, sans-serif;
   margin-bottom: 0;
   font-weight: bold;
   color: black;
 }
 .seperate-ex h4 {
+  font-family: Arial, Helvetica, sans-serif;
   margin-bottom: 0;
   font-weight: bold;
   line-height: 2;
   color: #3849EB;
 }
 .seperate-ex ul {
+  font-family: Arial, Helvetica, sans-serif;
   padding-left: 20px;
   line-height: 10px;
 }
 .seperate-ex ul li {
+  font-family: Arial, Helvetica, sans-serif;
   line-height: 20px;
 }
 .card-content {
+  font-family: Arial, Helvetica, sans-serif;
   display: flex;
   padding: 10px;
   color: black;
@@ -61,6 +67,7 @@
 }
 .card-button button,
 .card-des button {
+  font-family: Arial, Helvetica, sans-serif;
   padding: 0;
   cursor: pointer;
   /* border-radius: 11px; */
@@ -73,6 +80,7 @@
   outline: 1px dashed blue !important;
 }
 .select-state {
+  font-family: Arial, Helvetica, sans-serif;
   height: 30px;
   margin-left: 20px;
   border: none;
@@ -80,6 +88,7 @@
   padding: 0 20px;
 }
 .seperate-ex {
+  font-family: Arial, Helvetica, sans-serif;
   max-width: 280px;
   /* border-bottom: 1px dashed orange; */
   /* margin-bottom: 10px; */
@@ -91,12 +100,14 @@
 }
 
 .seperate-ex ul {
+  font-family: Arial, Helvetica, sans-serif;
   list-style: none;
   position: relative;
   margin-bottom: 0;
 }
 
 .seperate-ex ul li::before {
+  font-family: Arial, Helvetica, sans-serif;
   content: "";
   display: inline-block; 
   width: 7px;
@@ -116,6 +127,7 @@
   border-right: none;
 }
 .tag-element {
+  font-family: Arial, Helvetica, sans-serif;
   margin-right: 10px;
 }
 
@@ -124,6 +136,7 @@
   margin-right: 15px;
 }
 .hover-ex {
+  font-family: Arial, Helvetica, sans-serif;
   max-width: 0;
   transition: .5s all;
   overflow: hidden;
@@ -136,6 +149,7 @@
 }
 
 .hover-change-ex {
+  font-family: Arial, Helvetica, sans-serif;
   opacity: 1;
   white-space: initial;
   width: 295px;
@@ -148,6 +162,7 @@
 }
 
 #popup-hover {
+  font-family: Arial, Helvetica, sans-serif;
   z-index: 3333333;
   position: absolute;
   margin-top: -30px;
@@ -155,6 +170,7 @@
 }
 
 .hover-element {
+  font-family: Arial, Helvetica, sans-serif;
   box-shadow: 0px 1px 16px 0px rgba(0,0,0,0.75);
   display: flex;
   justify-content: space-between;
@@ -167,6 +183,7 @@
 }
 
 .hover-element h4 {
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 18px;
   display: flex;
   align-items: center;
@@ -175,12 +192,14 @@
 }
 
 .width-box {
+  font-family: Arial, Helvetica, sans-serif;
   margin: 0;
   font-size: 15px;
   padding: 3px;
   padding-right: 10px;
 }
 #btnClose {
+  font-family: Arial, Helvetica, sans-serif;
   background-color: transparent;
   cursor: pointer;
   transition: .3s all ease;
@@ -192,6 +211,7 @@
   width: 20px;
 }
 #editCotent, #changePosition {
+  font-family: Arial, Helvetica, sans-serif;
   background-color: transparent;
   transition: .3s all ease;
 }
@@ -206,12 +226,14 @@
   display: none !important;
 }
 .open-ex {
+  font-family: Arial, Helvetica, sans-serif;
   position: fixed;
   top: 10px;
   right: 10px;
   z-index: 99999;
 }
 .open-ex button {
+  font-family: Arial, Helvetica, sans-serif;
   transition: .3s all ease;
   border: none;
   border-radius: 20px;
