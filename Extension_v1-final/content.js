@@ -215,7 +215,8 @@ function CreateBodyText() {
   let bodyText = document.createElement('div')
   $(bodyText).addClass('append-conent')
   let tagP = document.createElement('p')
-  tagP.innerHTML = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, dignissimos?`
+  tagP.innerHTML = `<h2>What is Lor<a href="#">em I</a>psum?</h2>
+  <p><strong>Lorem Ipsum</strong> is simply dummy text of the prin<a href="#">ting and typesetting i</a>ndustry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>`
   let tagP2 = document.createElement('p')
   tagP2.innerHTML = `	Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium delectus iure et debitis dolorum aperiam, officiis tempora corrupti hic dolor.`
   let ul = document.createElement('ul')
@@ -315,7 +316,7 @@ function Ramdomcontent() {
   }
   WonderTest.countEl = randomNumber
   let content = $('body').find('.highlight-ex')
-  let arrH = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'SPAN']
+  let arrH = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'SPAN', 'LI', 'STRONG']
   if (arrH.includes($(content)[0].nodeName)) {
     if ($(selected).val() == 1) {
       $(content)[0].innerText = WonderTest.contentOld
