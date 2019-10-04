@@ -610,6 +610,7 @@ function EventClick(e) {
       </div>
       <div>
         ${hasTwoCol.valid == true? `<button id="changePosition"><img src="${chrome.runtime.getURL('images/update.png')}"/></button>`:`
+        <button id="editAsHtmlBtn">Edit as HTML</button>
         <button id="editCotent"><img src="${chrome.runtime.getURL('images/update.png')}"/></button>
         <select class="select-state">
         <option value="2">Random</option>
@@ -623,11 +624,21 @@ function EventClick(e) {
       <button id="btnClose"><img src="${chrome.runtime.getURL('images/close_icon.png')}"/></button>
       </div>
     </div>
+    <div class="card-edit-as-html" style="width: auto; margin-top: 10px; display:none;">
+      <div class="edit-html-editor" style="text-align:center;">
+        <textarea class="editor" style="min-width: 590px;" rows="10">...</textarea>
+      </div>
+      <div class="edit-html-btn" style="text-align: center;">
+        <a href="javascript:;" class="btn-update-edit-html">Update HTML</a> || <a href="javascript:;" class="btn-close-edit-html">Close</a>
+      </div>
+    </div>
+
     <div class="card-content">
       ${($(el).css('cursor') != 'pointer' && WonderTest.eleHasFontSize.includes($(el)[0].nodeName ))? getHoverCssChange(el) :''}
       ${ $(el)[0].nodeName == 'IMG'? createAttImage(getProp, $(el)[0]): ($(el).css('background-image') != 'none' ? createAttBackground(getProp, $(el)[0]): createNormalProperty($(el)[0]))}
     </div>
     </div>`
+
     document.body.appendChild(newEl)
     let styleNew = document.getElementById('popup-detail')
     let cardContent = document.getElementsByClassName('card-content')
@@ -670,6 +681,14 @@ function EventClick(e) {
     }
     // pastEl = el // gán el click trước để remove  .card-ex-edit, .card-ex-edit*
   }
+
+  //== Edit as HTML Init
+  $('#editAsHtmlBtn').on('click', function(){
+    let $exPopupDetail = $('#popup-detail');
+    editAsHTML(e, $exPopupDetail)
+  })
+  //== End Edit as HTML Init
+
   $('#editCotent').click(btnEditClick(e))
   let addEF = document.getElementById('popup-detail')
   if ($(addEF).length > 0) {
@@ -850,3 +869,63 @@ $('.btnGlobal').click(function (e) {
 })
 //tooltip css
 document.onkeydown = WonderKeyMap;
+
+/*=== EDIT AS HTML==== */
+var editAsHTML = function(e, $exPopupDetail){
+  if($exPopupDetail.length == 0 || !e){
+    return;
+  }
+  
+  let el = e.target
+  let $el = $(el)
+  let $cardDes = $exPopupDetail.find('.card-des')
+  let $cardContent = $exPopupDetail.find('.card-content')
+  let $cardEditAsHtml = $exPopupDetail.find('.card-edit-as-html')
+  let $editEditor = $cardEditAsHtml.find('.editor')
+  let $editBtn = $cardEditAsHtml.find('.btn-update-edit-html')
+  let $closeBtn = $cardEditAsHtml.find('.btn-close-edit-html')
+  init();
+
+  function init(){
+    //test();
+    showEditor();
+    btnUpdateHTMLHandle();
+    btnCloseHTMLHandle();
+  }
+
+  function showEditor(){
+    var elHTML = $el.wrap('<p/>').parent().html();
+    $el.unwrap();
+    $editEditor.val(elHTML)
+    $cardEditAsHtml.slideDown(function(){
+      $exPopupDetail.height($cardContent.height() + $cardDes.height() + $cardEditAsHtml.height() + 50)
+    });
+  }
+
+  function closeEditor(){
+    $cardEditAsHtml.slideUp(function(){
+      $exPopupDetail.height($cardContent.height() + $cardDes.height() + 50)
+    });
+  }
+
+  function btnUpdateHTMLHandle(){
+    $editBtn.click(function(){
+      let elHTML = $editEditor.val()
+      $el.replaceWith(elHTML)
+      closeEditor();
+    })
+  }
+
+  function btnCloseHTMLHandle(){
+    $closeBtn.click(function(){
+      closeEditor(); 
+    })
+  }
+
+  function test(){
+    console.log('E: ', e)
+    console.log('Edit as HTML:', $cardEditAsHtml.length)
+    console.log('Test Edit as HTML');
+  }
+}
+/*=== END EDIT AS HTML==== */
