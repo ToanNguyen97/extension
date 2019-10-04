@@ -52,6 +52,12 @@ chrome.contextMenus.onClicked.addListener(function (info, tab) {
         chrome.tabs.executeScript({
         file: 'content.js'
         })
+        let notification = {
+          type: 'basic',
+          iconUrl: 'images/icons8-increase-font-100.png',
+          title: 'Yeah!!',
+          message: 'Turn On 9thWonder Tools Test'
+        }
         chrome.notifications.clear('Event Active')
         chrome.notifications.create('Event Active', notification)
         chrome.storage.local.set({Clicked: false}, function() {})
