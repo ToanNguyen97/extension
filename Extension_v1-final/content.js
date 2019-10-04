@@ -666,7 +666,6 @@ function EventClick(e) {
 }
 
 function EventHover(e) {
-  console.log('1')
   let el = e.target
   let getProp = window.getComputedStyle(el, null)
   if (!$(e.target).is('.popup-font, .popup-font *, .open-ex, .open-ex button')) {
@@ -811,7 +810,6 @@ $("body").on('click', '#btnClose', function(e) {
     $('#popup-hover').remove()
   }
   let elements = WonderTest.GetAllElements(document.body);
-  console.log('ne2')
   for (let i = 0; i < elements.length; i++) {
     if (!$(elements[i]).is('.open-ex, .open-ex button')) {
       $(elements[i]).on("mouseover", EventHover);
