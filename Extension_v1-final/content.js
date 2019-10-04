@@ -680,14 +680,16 @@ function EventClick(e) {
       }, 500)
     }
     // pastEl = el // gán el click trước để remove  .card-ex-edit, .card-ex-edit*
-  }
 
-  //== Edit as HTML Init
-  $('#editAsHtmlBtn').on('click', function(){
-    let $exPopupDetail = $('#popup-detail');
-    editAsHTML(e, $exPopupDetail)
-  })
-  //== End Edit as HTML Init
+    //== Edit as HTML Init
+    setTimeout(function(){
+      $('#editAsHtmlBtn').on('click', function(){
+        let $exPopupDetail = $('#popup-detail');
+        editAsHTML(e, $exPopupDetail)
+      })
+    }, 100)
+    //== End Edit as HTML Init
+  }
 
   $('#editCotent').click(btnEditClick(e))
   let addEF = document.getElementById('popup-detail')
