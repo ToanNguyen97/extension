@@ -40,15 +40,22 @@ chrome.browserAction.onClicked.addListener(function (tab) {
 })
 
 chrome.contextMenus.onClicked.addListener(function (info, tab) {
-  if (info.menuItemId === "Extension9th") { // here's where you'll need the ID
-  chrome.tabs.executeScript(tab.id,{
-    file: 'jquery.min.js'
-    })
-    chrome.tabs.insertCSS(tab.id,{
-      file: 'content.css'
-    })
-    chrome.tabs.executeScript({
-    file: 'content.js'
-    })
-  }
+  chrome.storage.local.get('Clicked', function(result) {
+    if(result.Clicked) {
+      if (info.menuItemId === "Extension9th") { // here's where you'll need the ID
+      chrome.tabs.executeScript(tab.id,{
+        file: 'jquery.min.js'
+        })
+        chrome.tabs.insertCSS(tab.id,{
+          file: 'content.css'
+        })
+        chrome.tabs.executeScript({
+        file: 'content.js'
+        })
+        chrome.notifications.clear('Event Active')
+        chrome.notifications.create('Event Active', notification)
+        chrome.storage.local.set({Clicked: false}, function() {})
+      }
+    }}
+    )
 })
