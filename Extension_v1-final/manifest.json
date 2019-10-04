@@ -15,14 +15,16 @@
     "notifications",
     "storage"
   ],
-  "background": { "page":"background.html" },
+  "background": {
+    "page": "background.html"
+  },
   "icons": {
     "16": "images/icons8-increase-font-16.png",
     "32": "images/icons8-increase-font-32.png",
     "48": "images/icons8-increase-font-48.png",
     "128": "images/icons8-increase-font-128.png"
   },
-    "commands": {
+  "commands": {
     "_execute_browser_action": {
       "suggested_key": {
         "default": "Ctrl+Shift+1",
@@ -32,8 +34,8 @@
     }
   },
   "web_accessible_resources": [
-		"images/refresh-64.png",
-		"images/close_icon.png",
-		"images/update.png"
-	]
+    "images/refresh-64.png",
+    "images/close_icon.png",
+    "images/update.png"
+  ]
 }

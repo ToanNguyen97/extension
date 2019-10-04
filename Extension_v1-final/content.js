@@ -31,16 +31,17 @@ function ConvertRGBToHex(str) {
   }
   return hexStr;
 }
+
 function ConvertRGBAToHex(rgba) {
   let sep = rgba.indexOf(",") > -1 ? "," : " ";
   rgba = rgba.substr(5).split(")")[0].split(sep);
   if (rgba.indexOf("/") > -1)
-    rgba.splice(3,1);
+    rgba.splice(3, 1);
 
   for (let R in rgba) {
     let r = rgba[R];
     if (r.indexOf("%") > -1) {
-      let p = r.substr(0,r.length - 1) / 100;
+      let p = r.substr(0, r.length - 1) / 100;
 
       if (R < 3) {
         rgba[R] = Math.round(p * 255);
@@ -50,9 +51,9 @@ function ConvertRGBAToHex(rgba) {
     }
   }
   let r = (+rgba[0]).toString(16),
-      g = (+rgba[1]).toString(16),
-      b = (+rgba[2]).toString(16),
-      a = Math.round(+rgba[3] * 255).toString(16);
+    g = (+rgba[1]).toString(16),
+    b = (+rgba[2]).toString(16),
+    a = Math.round(+rgba[3] * 255).toString(16);
 
   if (r.length == 1)
     r = "0" + r;
@@ -68,6 +69,7 @@ function ConvertRGBAToHex(rgba) {
   }
   return hexStr;
 }
+
 function EffectMoveBox(el) {
   let x = 0
   let y = 0
@@ -201,7 +203,7 @@ function ChangeForIMGTag(num, el) {
     'https://picsum.photos/id/431/2000/500',
     'https://picsum.photos/id/321/2000/2000',
     'https://picsum.photos/id/215/375/667'
-    
+
   ]
   let imgRamdom = arrayImage[num]
   if ($(el)[0].nodeName == 'IMG') {
@@ -311,7 +313,7 @@ function AllCardBasic() {
 function Ramdomcontent() {
   let selected = $('.select-state')
   let randomNumber = Math.floor(Math.random() * 4 + 1)
-  while(randomNumber == WonderTest.countEl) {
+  while (randomNumber == WonderTest.countEl) {
     randomNumber = Math.floor(Math.random() * 4 + 1)
   }
   WonderTest.countEl = randomNumber
@@ -359,7 +361,7 @@ function Ramdomcontent() {
         $(content)[0].src = WonderTest.contentOld
       }
     } else {
-      ChangeForIMGTag(randomNumber,content)
+      ChangeForIMGTag(randomNumber, content)
     }
   }
   // $('#popup-hover').remove()
@@ -367,51 +369,58 @@ function Ramdomcontent() {
 
 function DetecColor(el) {
   let color
-  if($(el).css('color').match(/rgba/)) {
+  if ($(el).css('color').match(/rgba/)) {
     return ConvertRGBAToHex($(el).css('color'))
-  } else if($(el).css('color').match(/rgb/)) {
-   return ConvertRGBToHex($(el).css('color'))
+  } else if ($(el).css('color').match(/rgb/)) {
+    return ConvertRGBToHex($(el).css('color'))
   }
 }
+
 function DetecBGColor(el) {
-  if($(el).css('background-color').match(/rgba/)) {
+  if ($(el).css('background-color').match(/rgba/)) {
     return ConvertRGBAToHex($(el).css('background-color'))
-  } else if($(el).css('background-color').match(/rgb/)) {
+  } else if ($(el).css('background-color').match(/rgb/)) {
     return ConvertRGBToHex($(el).css('background-color'))
   }
 }
+
 function DetecBoxShadow(el) {
   let rgba = el.substr(el.indexOf('r'), el.indexOf(')') + 1)
   let position = el.substr(el.indexOf(')') + 1, el.length - el.indexOf('r'))
-  if(rgba.match(/rgba/)) {
-    rgba =  ConvertRGBAToHex(rgba)
-  } else if(rgba.match(/rgb/)) {
+  if (rgba.match(/rgba/)) {
+    rgba = ConvertRGBAToHex(rgba)
+  } else if (rgba.match(/rgb/)) {
     rgba = ConvertRGBToHex(rgba)
   }
-  return {bg: rgba, pos: position}
+  return {
+    bg: rgba,
+    pos: position
+  }
 }
+
 function DetecBorder(el) {
-  if(!el.includes('none')) {
-  let rgba = el.substring(el.indexOf('r'), el.indexOf(')') + 1)
-  if(rgba.match(/rgba/)) {
-    rgba =  ConvertRGBAToHex(rgba)
-  } else if(rgba.match(/rgb/)) {
-    rgba = ConvertRGBToHex(rgba)
-  }
-  let px = el.substring(0, el.indexOf('x') + 1)
-  let style = el.substring(el.indexOf('x') + 1, el.indexOf('r'))
-  let li =  '<li>Border:&nbsp;'+ px +' '+ rgba + ' ' + style +`<span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid ${ rgba == '#FFFFFF'? 'black': rgba };background-color: ${rgba};">&nbsp;</span>`+'</li>'
-  return li
+  if (!el.includes('none')) {
+    let rgba = el.substring(el.indexOf('r'), el.indexOf(')') + 1)
+    if (rgba.match(/rgba/)) {
+      rgba = ConvertRGBAToHex(rgba)
+    } else if (rgba.match(/rgb/)) {
+      rgba = ConvertRGBToHex(rgba)
+    }
+    let px = el.substring(0, el.indexOf('x') + 1)
+    let style = el.substring(el.indexOf('x') + 1, el.indexOf('r'))
+    let li = '<li>Border:&nbsp;' + px + ' ' + rgba + ' ' + style + `<span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid ${ rgba == '#FFFFFF'? 'black': rgba };background-color: ${rgba};">&nbsp;</span>` + '</li>'
+    return li
   }
   return ''
 }
+
 function ConvertMaxtrixToTransform(el) {
   trans = $(el).css('transform')
   numberPattern = /-?\d+\.?\d+|\d+/g
-  values = trans.match( numberPattern );
+  values = trans.match(numberPattern);
   let arrStyle = ['ScaleX', 'SkewY', 'SkewX', 'ScaleY', 'TranslateX', 'TranslateY']
-  for(let item = 0; item < values.length ; item++) {
-    if(values[item] != 0) {
+  for (let item = 0; item < values.length; item++) {
+    if (values[item] != 0) {
       values[item] = arrStyle[item] + ': ' + values[item]
     }
   }
@@ -420,6 +429,7 @@ function ConvertMaxtrixToTransform(el) {
   })
   return values
 }
+
 function createAttBackground(getProp, image) {
   let colorBG = DetecBGColor(image)
   let background = `<div class="background-ex seperate-ex">
@@ -465,6 +475,7 @@ function createNormalProperty(el) {
   </div>`
   return normalProperty
 }
+
 function createHoverBox(el) {
   let hoverEl = document.createElement('div')
   hoverEl.setAttribute('id', 'popup-hover')
@@ -523,28 +534,29 @@ function getHoverCssChange(el) {
   </div>`
   return hoverPropertyChange
 }
+
 function getColToChange(el) {
   let obj = {
     valid: false
   }
-  if($(el)[0].hasChildNodes()) {
+  if ($(el)[0].hasChildNodes()) {
     let elRow
     let arrEl = WonderTest.GetAllElements($(el)[0])
-    for(let i = 0; i < arrEl.length; i++) {
-      if(arrEl[i].className.indexOf("row") != -1) {
+    for (let i = 0; i < arrEl.length; i++) {
+      if (arrEl[i].className.indexOf("row") != -1) {
         elRow = arrEl[i]
         break;
       }
     }
-    if($(elRow).length > 0 && $(elRow)[0].hasChildNodes()) {
+    if ($(elRow).length > 0 && $(elRow)[0].hasChildNodes()) {
       WonderTest.arrCol = []
-      for(let item of $(elRow)[0].childNodes) {
+      for (let item of $(elRow)[0].childNodes) {
         let a = $(item)[0].className
-        if( $(item)[0].className != undefined && ( $(item)[0].className.match(/\bcol-\w+-\d+/) || $(item)[0].className.match(/\bcol-\d+/))) {
+        if ($(item)[0].className != undefined && ($(item)[0].className.match(/\bcol-\w+-\d+/) || $(item)[0].className.match(/\bcol-\d+/))) {
           WonderTest.arrCol.push(item)
         }
       }
-      if(WonderTest.arrCol.length > 0 && WonderTest.arrCol.length == 2) {
+      if (WonderTest.arrCol.length > 0 && WonderTest.arrCol.length == 2) {
         return obj = {
           valid: true,
           col1: WonderTest.arrCol[0],
@@ -555,10 +567,11 @@ function getColToChange(el) {
   }
   return obj
 }
+
 function EventClick(e) {
   let el = e.target
   // fix tam hover
-  if(!$(e.target).is('#btnClose img')) {
+  if (!$(e.target).is('#btnClose img')) {
     let elements = WonderTest.GetAllElements(document.body);
     for (let i = 0; i < elements.length; i++) {
       $(elements[i]).off("mouseover", EventHover, false);
@@ -621,24 +634,24 @@ function EventClick(e) {
     let cardDes = document.getElementsByClassName('card-des')
     $(styleNew).css('height', $(cardDes[0]).outerHeight() + $(cardContent[0]).outerHeight() + 10 + 'px')
     if ($(el).css('cursor') != 'pointer') {
-      if(e.clientX/$(window).innerWidth() > 0.5) {
+      if (e.clientX / $(window).innerWidth() > 0.5) {
         $(styleNew).css('right', $(window).innerWidth() - $(el).offset().left + 'px')
       } else {
-        $(styleNew).css('left', $(el).offset().left + $(el).innerWidth() + 'px')     
+        $(styleNew).css('left', $(el).offset().left + $(el).innerWidth() + 'px')
       }
       $('.hover-ex').css('display', 'none')
-      if(e.clientY/$(window).innerHeight() > 0.5) {
+      if (e.clientY / $(window).innerHeight() > 0.5) {
         $(styleNew).css('top', $(el).offset().top - $(styleNew).innerHeight() + 'px')
       } else {
-        $(styleNew).css('top', $(el).offset().top + $(el).innerHeight() + 'px')     
+        $(styleNew).css('top', $(el).offset().top + $(el).innerHeight() + 'px')
       }
     } else {
-      if(e.clientY/$(window).innerHeight() > 0.5) {
+      if (e.clientY / $(window).innerHeight() > 0.5) {
         $(styleNew).css('top', $(el).offset().top - $(styleNew).innerHeight() + $(el).innerHeight() + 'px')
       } else {
-        $(styleNew).css('top',$(el).offset().top + 'px')
+        $(styleNew).css('top', $(el).offset().top + 'px')
       }
-      $(styleNew).css('left',$(el).offset().left + 'px')
+      $(styleNew).css('left', $(el).offset().left + 'px')
       $('.card-content').append(getHoverCss(el))
       $('.hover-ex').css('max-width', '290px')
       $('.hover-ex').css('padding-right', '15px')
@@ -646,7 +659,7 @@ function EventClick(e) {
       $(styleNew).css('height', $(cardDes[0]).outerHeight() + $(cardContent[0]).outerHeight() + 10 + 'px')
       setTimeout(() => {
         $('.hover-change-ex').remove()
-        if( WonderTest.eleHasFontSize.includes($(el)[0].nodeName) ){
+        if (WonderTest.eleHasFontSize.includes($(el)[0].nodeName)) {
           $('.card-content').append(getHoverCssChange(el))
           $(styleNew).css('height', $(cardDes[0]).outerHeight() + $(cardContent[0]).outerHeight() + 10 + 'px')
         } else {
@@ -655,7 +668,7 @@ function EventClick(e) {
         }
       }, 500)
     }
-   // pastEl = el // gán el click trước để remove  .card-ex-edit, .card-ex-edit*
+    // pastEl = el // gán el click trước để remove  .card-ex-edit, .card-ex-edit*
   }
   $('#editCotent').click(btnEditClick(e))
   let addEF = document.getElementById('popup-detail')
@@ -714,7 +727,7 @@ function WonderTest() {
     }
     return elements;
   }
-  this.eleHasFontSize = ['H1','H2','H3','H4','H5','H6', 'A', 'P','SPAN', 'LI', 'STRONG' ]
+  this.eleHasFontSize = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'A', 'P', 'SPAN', 'LI', 'STRONG']
   this.eleDontHasFontSize = ['IMG', 'BG']
   this.eleDontHas = ['DIV']
   this.haveEventListeners = false
@@ -743,7 +756,7 @@ function WonderTest() {
     var document = GetCurrentDocument();
     var elements = this.GetAllElements(document.body);
     for (var i = 0; i < elements.length; i++) {
-      if($(elements[i]).is('a.ps-as')) {
+      if ($(elements[i]).is('a.ps-as')) {
         $(elements[i]).addClass('ex-d-none')
         $(elements[i]).parent().addClass('pointer-ex')
       }
@@ -768,17 +781,19 @@ function WonderTest() {
     for (let i = 0; i < elements.length; i++) {
       $(elements[i]).off("click", EventClick, false);
       $(elements[i]).off("mouseover", EventHover, false);
-      if($(elements[i]).hasClass('ex-d-none')) {
+      if ($(elements[i]).hasClass('ex-d-none')) {
         $(elements[i]).removeClass('ex-d-none')
         $(elements[i]).parent().removeClass('pointer-ex')
-      }   
+      }
     }
     // this.haveEventListeners = false;
   }
 }
 
 WonderTest.prototype.Enable = function () {
-  chrome.storage.local.set({Clicked: false}, function() {})
+  chrome.storage.local.set({
+    Clicked: false
+  }, function () {})
   let divClose = document.createElement('div')
   $(divClose).addClass('open-ex')
   divClose.innerHTML = `
@@ -787,7 +802,9 @@ WonderTest.prototype.Enable = function () {
   this.AddEventListeners();
 }
 WonderTest.prototype.Disable = function () {
-  chrome.storage.local.set({Clicked: true}, function() {})
+  chrome.storage.local.set({
+    Clicked: true
+  }, function () {})
   if ($('.open-ex').length > 0) {
     $('.open-ex').remove()
   }
@@ -801,7 +818,7 @@ if (WonderTest.haveEventListeners === false) {
 } else {
   WonderTest.Disable()
 }
-$("body").on('click', '#btnClose', function(e) {
+$("body").on('click', '#btnClose', function (e) {
   let popupNew = document.getElementById('popup-ex')
   if (popupNew != null) {
     popupNew.remove()
@@ -818,8 +835,8 @@ $("body").on('click', '#btnClose', function(e) {
   // e.stopPropagation()
 })
 $("body").on('click', '#changePosition img', () => {
-  if(WonderTest.arrCol.length > 0 && WonderTest.arrCol.length == 2) {
-    if($(WonderTest.arrCol[0]).hasClass('order-1')){
+  if (WonderTest.arrCol.length > 0 && WonderTest.arrCol.length == 2) {
+    if ($(WonderTest.arrCol[0]).hasClass('order-1')) {
       $(WonderTest.arrCol[0]).removeClass('order-1')
       $(WonderTest.arrCol[1]).addClass('order-1')
     } else {
@@ -833,4 +850,3 @@ $('.btnGlobal').click(function (e) {
 })
 //tooltip css
 document.onkeydown = WonderKeyMap;
-
