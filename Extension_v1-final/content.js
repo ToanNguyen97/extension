@@ -465,6 +465,23 @@ function createNormalProperty(el) {
   </div>`
   return normalProperty
 }
+function createHoverBox(el) {
+  let hoverEl = document.createElement('div')
+  hoverEl.setAttribute('id', 'popup-hover')
+  hoverEl.innerHTML = `
+  <div class="hover-element">
+    <h4>${$(el).css('background-image') != 'none'? $(el)[0].nodeName + ' - BG': $(el)[0].nodeName}${$(el).hasClass('container')== true? '<span style="color: blue;font-size: 15px;"> .container</span>':''}</h4>
+    <p class="width-box">${$(el).css('width').substring(0, $(el).css('width').indexOf('px'))+ ' x ' + $(el).css('height').substring(0,$(el).css('height').indexOf('px'))}</p>
+  </div>`
+  document.body.appendChild(hoverEl)
+  let styleHover = document.getElementById('popup-hover')
+  $(styleHover).css('top', $(el).offset().top - 5 + 'px')
+  $(styleHover).css('left', $(el).offset().left + 'px')
+  let elHoverBox = $(styleHover).find('.hover-element')
+  let tagEl = $(elHoverBox).find('h4')
+  let tagPEl = $(elHoverBox).find('.width-box')
+  $(elHoverBox).css('width', 20 + $(tagEl).outerWidth() + $(tagPEl).outerWidth())
+}
 // get hover for element
 function getHoverCss(el) {
   let colorBG = DetecBGColor(el)
@@ -541,9 +558,11 @@ function getColToChange(el) {
 function EventClick(e) {
   let el = e.target
   // fix tam hover
-  var elements = WonderTest.GetAllElements(document.body);
-  for (var i = 0; i < elements.length; i++) {
-    elements[i].removeEventListener("mouseover", EventHover, false);
+  if(!$(e.target).is('#btnClose img')) {
+    let elements = WonderTest.GetAllElements(document.body);
+    for (let i = 0; i < elements.length; i++) {
+      $(elements[i]).off("mouseover", EventHover, false);
+    }
   }
   if (!$(e.target).is('.popup-font, .popup-font *, .open-ex, .open-ex button')) {
     e.preventDefault()
@@ -551,9 +570,14 @@ function EventClick(e) {
     let popupNew = document.getElementById('popup-ex')
     if (popupNew != null) {
       popupNew.remove()
-      $(pastEl).removeClass('highlight-ex')
+      $('body').find('.highlight-ex').removeClass('highlight-ex')
+      // $(pastEl).removeClass('highlight-ex')
     }
     $(el).addClass('highlight-ex')
+    if ($('#popup-hover').length) {
+      $('#popup-hover').remove()
+    }
+    createHoverBox(el)
     // check tag la bg hay img hay text
     WonderTest.contentOld = $(el)[0].innerText
     if ($(el).css('background-image') != 'none') {
@@ -631,7 +655,7 @@ function EventClick(e) {
         }
       }, 500)
     }
-    pastEl = el // gán el click trước để remove  .card-ex-edit, .card-ex-edit*
+   // pastEl = el // gán el click trước để remove  .card-ex-edit, .card-ex-edit*
   }
   $('#editCotent').click(btnEditClick(e))
   let addEF = document.getElementById('popup-detail')
@@ -642,33 +666,21 @@ function EventClick(e) {
 }
 
 function EventHover(e) {
+  console.log('1')
   let el = e.target
   let getProp = window.getComputedStyle(el, null)
   if (!$(e.target).is('.popup-font, .popup-font *, .open-ex, .open-ex button')) {
     if ($('#popup-hover').length) {
-      $(pastEl).removeClass('highlight-ex')
+      $('body').find('.highlight-ex').removeClass('highlight-ex')
+      // $(pastEl).removeClass('highlight-ex')
       $('#popup-hover').remove()
     }
-    let hoverEl = document.createElement('div')
-    hoverEl.setAttribute('id', 'popup-hover')
-    hoverEl.innerHTML = `
-    <div class="hover-element">
-      <h4>${$(el).css('background-image') != 'none'? $(el)[0].nodeName + ' - BG': $(el)[0].nodeName}${$(el).hasClass('container')== true? '<span style="color: blue;font-size: 15px;"> .container</span>':''}</h4>
-      <p class="width-box">${getProp.getPropertyValue('width').substring(0, getProp.getPropertyValue('width').indexOf('px'))+ ' x ' + getProp.getPropertyValue('height').substring(0,getProp.getPropertyValue('height').indexOf('px'))}</p>
-    </div>`
-    document.body.appendChild(hoverEl)
-    let styleHover = document.getElementById('popup-hover')
-    $(styleHover).css('top', $(el).offset().top - 5 + 'px')
-    $(styleHover).css('left', $(el).offset().left + 'px')
-    let elHoverBox = $(styleHover).find('.hover-element')
-    let tagEl = $(elHoverBox).find('h4')
-    let tagPEl = $(elHoverBox).find('.width-box')
-    $(elHoverBox).css('width', 20 + $(tagEl).outerWidth() + $(tagPEl).outerWidth())
+    createHoverBox(el)
     if (!$(this).hasClass('highlight-ex')) {
       $(this).addClass('highlight-ex')
     }
-    pastEl = el
-    e.stopImmediatePropagation()
+    //pastEl = el
+    e.stopPropagation()
   }
 }
 
@@ -685,21 +697,6 @@ function WonderKeyMap(e) {
 }
 
 function WonderTest() {
-  this.createPopup = function () {
-    let newEl = document.createElement('div')
-    newEl.setAttribute('id', 'popup-ex')
-    newEl.innerHTML = `<div class="card-ex popup-font" id="popup-detail" style="display: none" >
-    <div class="card-des">
-      <span>Tag Element: </span>&nbsp;<h4>content</h4>
-    </div>
-    <div class="card-content">
-    </div>
-    <div class="card-button">
-      <button id="editCotent">Edit</button>
-    </div>
-    </div>`
-    document.body.appendChild(newEl)
-  }
   this.GetAllElements = function (element) {
     var elements = new Array();
 
@@ -752,8 +749,8 @@ function WonderTest() {
         $(elements[i]).parent().addClass('pointer-ex')
       }
       if (!$(elements[i]).is('.open-ex, .open-ex button')) {
-        elements[i].addEventListener("click", EventClick, false);
-        elements[i].addEventListener("mouseover", EventHover, false);
+        $(elements[i]).on("click", EventClick);
+        $(elements[i]).on("mouseover", EventHover);
       }
     }
     this.haveEventListeners = true;
@@ -761,27 +758,28 @@ function WonderTest() {
   this.RemoveEventListeners = function () {
     var document = GetCurrentDocument();
     var elements = this.GetAllElements(document.body)
-    let elHighLight = $(elements).find('.highlight-ex')
-    let exPopup = $(elements).find('#popup-ex')
-    let exPopupHover = $(elements).find('#popup-hover')
+    let elHighLight = $('body').find('.highlight-ex')
+    let exPopup = $('body').find('#popup-ex')
+    let exPopupHover = $('body').find('#popup-hover')
     if (elHighLight.length > 0) {
       $(elHighLight).removeClass('highlight-ex')
       $(exPopup).remove()
       $(exPopupHover).remove()
     }
-    for (var i = 0; i < elements.length; i++) {
+    for (let i = 0; i < elements.length; i++) {
+      $(elements[i]).off("click", EventClick, false);
+      $(elements[i]).off("mouseover", EventHover, false);
       if($(elements[i]).hasClass('ex-d-none')) {
         $(elements[i]).removeClass('ex-d-none')
         $(elements[i]).parent().removeClass('pointer-ex')
-      }
-      elements[i].removeEventListener("click", EventClick, false);
-      elements[i].removeEventListener("mouseover", EventHover, false);
+      }   
     }
     // this.haveEventListeners = false;
   }
 }
 
 WonderTest.prototype.Enable = function () {
+  chrome.storage.local.set({Clicked: false}, function() {})
   let divClose = document.createElement('div')
   $(divClose).addClass('open-ex')
   divClose.innerHTML = `
@@ -804,20 +802,22 @@ if (WonderTest.haveEventListeners === false) {
 } else {
   WonderTest.Disable()
 }
-$("body").on('click', '#btnClose', () => {
-
+$("body").on('click', '#btnClose', function(e) {
   let popupNew = document.getElementById('popup-ex')
   if (popupNew != null) {
     popupNew.remove()
-    $(pastEl).removeClass('highlight-ex')
-    // $('#popup-hover').remove()
+    $('body').find('.highlight-ex').removeClass('highlight-ex')
+    //$(pastEl).removeClass('highlight-ex')
+    $('#popup-hover').remove()
   }
-  var elements = WonderTest.GetAllElements(document.body);
-  for (var i = 0; i < elements.length; i++) {
+  let elements = WonderTest.GetAllElements(document.body);
+  console.log('ne2')
+  for (let i = 0; i < elements.length; i++) {
     if (!$(elements[i]).is('.open-ex, .open-ex button')) {
-      elements[i].addEventListener("mouseover", EventHover, false);
+      $(elements[i]).on("mouseover", EventHover);
     }
   }
+  // e.stopPropagation()
 })
 $("body").on('click', '#changePosition img', () => {
   if(WonderTest.arrCol.length > 0 && WonderTest.arrCol.length == 2) {
