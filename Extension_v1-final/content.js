@@ -422,7 +422,7 @@ function ConvertMaxtrixToTransform(el) {
 }
 function createAttBackground(getProp, image) {
   let colorBG = DetecBGColor(image)
-  let background = `<div class="background-ex seperate-ex">
+  let background = `<div class="background-ex">
   <h4>Background Attribute</h4>
   <ul>
     <li>Background-position:&nbsp;${image.style.backgroundPosition}</li>
@@ -437,7 +437,7 @@ function createAttBackground(getProp, image) {
 }
 
 function createAttImage(getProp, image) {
-  let imageProperty = `<div class="background-ex seperate-ex">
+  let imageProperty = `<div class="background-ex">
   <h4>Image Attribute</h4>
   <ul>
     <li>Alt:&nbsp;${image.alt}</li>
@@ -452,7 +452,7 @@ function createAttImage(getProp, image) {
 
 function createNormalProperty(el) {
   let BoxShadow = DetecBoxShadow($(el).css('box-shadow'))
-  let normalProperty = `<div class="normal-ex seperate-ex">
+  let normalProperty = `<div class="normal-ex">
   <h4>Normal Attribute</h4>
   <ul>
     <li>Width:&nbsp;${$(el).css('width')}</li>
@@ -488,11 +488,11 @@ function getHoverCss(el) {
   let color = DetecColor(el)
   let BoxShadow = DetecBoxShadow($(el).css('box-shadow'))
   let hoverProperty = `
-  <div class="hover-ex seperate-ex">
+  <div class="hover-ex">
   <h4>Hover Attribute</h4>
   <ul>
     <li>Background-color:&nbsp;${colorBG}  <span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid #000;background-color: ${colorBG};">&nbsp;</span></li>
-    <li>Color:&nbsp;${color} <span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid ${color};background-color: ${color};">&nbsp;</span></li>
+    <li>Color:&nbsp;${color} <span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid black;background-color: ${color};">&nbsp;</span></li>
     <li>Position:&nbsp;${$(el).css('position')}</li>
     <li>Opacity:&nbsp;${$(el).css('opacity')}</li>
     ${$(el).css('box-shadow') != 'none'?`<li>Box-shadow:&nbsp;${BoxShadow.bg + BoxShadow.pos }<span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid ${ BoxShadow.bg == '#FFFFFF'? 'black': BoxShadow.bg };background-color: ${BoxShadow.bg};">&nbsp;</span></li></li>`: ''}
@@ -507,11 +507,11 @@ function getHoverCssChange(el) {
   let colorBG = DetecBGColor(el)
   let color = DetecColor(el)
   let hoverPropertyChange = `
-  <div class="hover-change-ex seperate-ex">
+  <div class="hover-change-ex">
     <h4>Font Attribute</h4>
     <ul>
       <li>Background-color:&nbsp;${colorBG}  <span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid #000;background-color: ${colorBG};">&nbsp;</span></li>
-      <li>Color:&nbsp;${color} <span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid ${color};background-color: ${color};">&nbsp;</span></li>
+      <li>Color:&nbsp;${color} <span style="width: 22px;display: inline-table;margin-left: 10px;border: 1px solid black;background-color: ${color};">&nbsp;</span></li>
       <li>Font-size:&nbsp;${$(el).css('font-size')}</li>
       <li>Font-weight:&nbsp;${$(el).css('font-weight')}</li>
       <li>Font-family:&nbsp;${$(el).css('font-family')}</li>
@@ -611,8 +611,14 @@ function EventClick(e) {
       </div>
     </div>
     <div class="card-content">
-      ${($(el).css('cursor') != 'pointer' && WonderTest.eleHasFontSize.includes($(el)[0].nodeName ))? getHoverCssChange(el) :''}
+      <div class="font-ex-box ${($(el).css('cursor') != 'pointer' && WonderTest.eleHasFontSize.includes($(el)[0].nodeName ))? 'seperate-ex' :''}">
+        ${($(el).css('cursor') != 'pointer' && WonderTest.eleHasFontSize.includes($(el)[0].nodeName ))? getHoverCssChange(el) :''}
+      </div>
+      <div class="hover-ex-box">
+      </div>
+      <div class="normal-ex-box seperate-ex">
       ${ $(el)[0].nodeName == 'IMG'? createAttImage(getProp, $(el)[0]): ($(el).css('background-image') != 'none' ? createAttBackground(getProp, $(el)[0]): createNormalProperty($(el)[0]))}
+      </div>
     </div>
     </div>`
     document.body.appendChild(newEl)
@@ -639,21 +645,25 @@ function EventClick(e) {
         $(styleNew).css('top',$(el).offset().top + 'px')
       }
       $(styleNew).css('left',$(el).offset().left + 'px')
-      $('.card-content').append(getHoverCss(el))
+      $('.hover-ex-box').addClass('seperate-ex')
+      $('.hover-ex-box').append(getHoverCss(el))
       $('.hover-ex').css('max-width', '290px')
       $('.hover-ex').css('padding-right', '15px')
       $('.hover-ex').css('padding-left', '15px')
-      $(styleNew).css('height', $(cardDes[0]).outerHeight() + $(cardContent[0]).outerHeight() + 10 + 'px')
+      setTimeout(() => {
+        $(styleNew).css('height', $(cardDes[0]).outerHeight() + $(cardContent[0]).outerHeight() + 10 + 'px')
+      }, 100)
       setTimeout(() => {
         $('.hover-change-ex').remove()
         if( WonderTest.eleHasFontSize.includes($(el)[0].nodeName) ){
-          $('.card-content').append(getHoverCssChange(el))
+          $('.font-ex-box').append(getHoverCssChange(el))
+          $('.font-ex-box').addClass('seperate-ex')
           $(styleNew).css('height', $(cardDes[0]).outerHeight() + $(cardContent[0]).outerHeight() + 10 + 'px')
         } else {
           $('.normal-ex').remove()
-          $('.card-content').append(createNormalProperty($(el)[0]))
+          $('.normal-ex-box').append(createNormalProperty($(el)[0]))
         }
-      }, 500)
+      }, 600)
     }
    // pastEl = el // gán el click trước để remove  .card-ex-edit, .card-ex-edit*
   }

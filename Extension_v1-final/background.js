@@ -36,7 +36,9 @@ chrome.browserAction.onClicked.addListener(function (tab) {
         chrome.storage.local.set({Clicked: false}, function() {})
   }}
   )
-
+  chrome.tabs.sendMessage(tab.id, {'status': true}, function (res) {
+    console.log('alo', res)
+  })
 })
 
 chrome.contextMenus.onClicked.addListener(function (info, tab) {
