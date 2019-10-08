@@ -884,11 +884,8 @@ document.onkeydown = WonderKeyMap;
 
 /*=== EDIT AS HTML==== */
 var editAsHTML = function(e, $exPopupDetail){
-  if($exPopupDetail.length == 0 || !e || $(e.target).is('.popup-font, .popup-font *, .open-ex, .open-ex button')){
-    console.log('000')
+  if($exPopupDetail.length == 0 || !e){
     return;
-  }else{
-    console.log('111')
   }
   
   let el = e.target
