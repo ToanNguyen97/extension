@@ -609,7 +609,7 @@ function EventClick(e) {
         <h4>${$(el).css('background-image') != 'none'? $(el)[0].nodeName + ' - BG': $(el)[0].nodeName}</h4>
       </div>
       <div>
-        ${hasTwoCol.valid == true? `<button id="changePosition"><img src="${chrome.runtime.getURL('images/update.png')}"/></button>`:`
+        ${hasTwoCol.valid == true? `<button id="editAsHtmlBtn">Edit as HTML</button> <button id="changePosition"><img src="${chrome.runtime.getURL('images/update.png')}"/></button>`:`
         <button id="editAsHtmlBtn">Edit as HTML</button>
         <button id="editCotent"><img src="${chrome.runtime.getURL('images/update.png')}"/></button>
         <select class="select-state">
@@ -624,11 +624,11 @@ function EventClick(e) {
       <button id="btnClose"><img src="${chrome.runtime.getURL('images/close_icon.png')}"/></button>
       </div>
     </div>
-    <div class="card-edit-as-html" style="width: auto; margin-top: 10px; display:none;">
-      <div class="edit-html-editor" style="text-align:center;">
-        <textarea class="editor" style="min-width: 590px;" rows="10">...</textarea>
+    <div class="card-edit-as-html"">
+      <div class="edit-html-editor">
+        <textarea class="editor" rows="10">...</textarea>
       </div>
-      <div class="edit-html-btn" style="text-align: center;">
+      <div class="edit-html-btn">
         <a href="javascript:;" class="btn-update-edit-html">Update HTML</a> || <a href="javascript:;" class="btn-close-edit-html">Close</a>
       </div>
     </div>
@@ -690,16 +690,16 @@ function EventClick(e) {
       }, 600)
     }
     // pastEl = el // gán el click trước để remove  .card-ex-edit, .card-ex-edit*
-
-    //== Edit as HTML Init
-    setTimeout(function(){
-      $('#editAsHtmlBtn').on('click', function(){
-        let $exPopupDetail = $('#popup-detail');
-        editAsHTML(e, $exPopupDetail)
-      })
-    }, 100)
-    //== End Edit as HTML Init
   }
+
+  //== Edit as HTML Init
+  setTimeout(function(){
+    $('#editAsHtmlBtn').on('click', function(){
+      let $exPopupDetail = $('#popup-detail');
+      editAsHTML(e, $exPopupDetail)
+    })
+  }, 100)
+  //== End Edit as HTML Init
 
   $('#editCotent').click(btnEditClick(e))
   let addEF = document.getElementById('popup-detail')
@@ -884,8 +884,11 @@ document.onkeydown = WonderKeyMap;
 
 /*=== EDIT AS HTML==== */
 var editAsHTML = function(e, $exPopupDetail){
-  if($exPopupDetail.length == 0 || !e){
+  if($exPopupDetail.length == 0 || !e || $(e.target).is('.popup-font, .popup-font *, .open-ex, .open-ex button')){
+    console.log('000')
     return;
+  }else{
+    console.log('111')
   }
   
   let el = e.target
