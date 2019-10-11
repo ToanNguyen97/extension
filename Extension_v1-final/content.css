@@ -22,6 +22,7 @@
     padding: 5px;
     margin: 0px;
     height: 0;
+    /* width: 0; */
     overflow: hidden;
     transition: .3s height width;
 }
@@ -260,4 +261,11 @@
 }
 .pointer-ex {
   cursor: pointer;
+}
+
+#editAsHtmlBtn {
+  background-color: white;
+}
+#editAsHtmlBtn img {
+  width: 25px;
 }

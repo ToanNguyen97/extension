@@ -16,8 +16,16 @@
     "storage"
   ],
   "background": {
-    "page": "background.html"
+    "page": "background.html",
+    "persistent": false
   },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "css": ["content.css"],
+      "js": ["jquery.min.js","content.js"]
+    }
+  ],
   "icons": {
     "16": "images/icons8-increase-font-16.png",
     "32": "images/icons8-increase-font-32.png",
@@ -36,6 +44,7 @@
   "web_accessible_resources": [
     "images/refresh-64.png",
     "images/close_icon.png",
-    "images/update.png"
+    "images/update.png",
+    "images/edit-64.png"
   ]
 }

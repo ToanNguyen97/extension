@@ -1,8 +1,9 @@
 /* eslint-disable */
+// console.log(hljs)
+// const hljs = requ
 function GetCurrentDocument() {
   return window.document;
 }
-
 function ConvertDecToHex(nb) {
   var nbHexa = ''
 
@@ -609,8 +610,8 @@ function EventClick(e) {
         <h4>${$(el).css('background-image') != 'none'? $(el)[0].nodeName + ' - BG': $(el)[0].nodeName}</h4>
       </div>
       <div>
-        ${hasTwoCol.valid == true? `<button id="changePosition"><img src="${chrome.runtime.getURL('images/update.png')}"/></button>`:`
-        <button id="editAsHtmlBtn">Edit as HTML</button>
+        ${hasTwoCol.valid == true? `  <button id="editAsHtmlBtn"><img src="${chrome.runtime.getURL('images/edit-64.png')}"/></button><button id="changePosition"><img src="${chrome.runtime.getURL('images/update.png')}"/></button>`:`
+        <button id="editAsHtmlBtn"><img src="${chrome.runtime.getURL('images/edit-64.png')}"/></button>
         <button id="editCotent"><img src="${chrome.runtime.getURL('images/update.png')}"/></button>
         <select class="select-state">
         <option value="2">Random</option>
@@ -626,7 +627,7 @@ function EventClick(e) {
     </div>
     <div class="card-edit-as-html" style="width: auto; margin-top: 10px; display:none;">
       <div class="edit-html-editor" style="text-align:center;">
-        <textarea class="editor" style="min-width: 590px;" rows="10">...</textarea>
+      <pre><code class="html"> <textarea class="editor" style="min-width: 590px;" rows="10">...</textarea></code></pre>
       </div>
       <div class="edit-html-btn" style="text-align: center;">
         <a href="javascript:;" class="btn-update-edit-html">Update HTML</a> || <a href="javascript:;" class="btn-close-edit-html">Close</a>
@@ -758,12 +759,13 @@ function WonderTest() {
     }
     return elements;
   }
-  this.eleHasFontSize = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'A', 'P', 'SPAN', 'LI', 'STRONG']
+  this.eleHasFontSize = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'A', 'P', 'SPAN', 'LI', 'STRONG', 'TD', 'TR']
   this.eleDontHasFontSize = ['IMG', 'BG']
   this.eleDontHas = ['DIV']
   this.haveEventListeners = false
   this.countEl = 0
   this.contentOld = ''
+  this.hljs = hljs
   this.ArrCol = new Array()
   this.valueHexa = new Array(
     '0',
@@ -846,9 +848,11 @@ WonderTest = new WonderTest()
 
 if (WonderTest.haveEventListeners === false) {
   WonderTest.Enable()
+  WonderTest.hljs.initHighlightingOnLoad
 } else {
   WonderTest.Disable()
 }
+
 $("body").on('click', '#btnClose', function (e) {
   let popupNew = document.getElementById('popup-ex')
   if (popupNew != null) {
@@ -941,3 +945,7 @@ var editAsHTML = function(e, $exPopupDetail){
   }
 }
 /*=== END EDIT AS HTML==== */
+chrome.runtime.onMessage.addListener(function (msg, sender) {
+  console.log('msg',msg)
+  console.log('sender', sender)
+})
