@@ -625,11 +625,11 @@ function EventClick(e) {
       <button id="btnClose"><img src="${chrome.runtime.getURL('images/close_icon.png')}"/></button>
       </div>
     </div>
-    <div class="card-edit-as-html" style="width: auto; margin-top: 10px; display:none;">
-      <div class="edit-html-editor" style="text-align:center;">
-      <pre><code class="html"> <textarea class="editor" style="min-width: 590px;" rows="10">...</textarea></code></pre>
+    <div class="card-edit-as-html"">
+      <div class="edit-html-editor">
+      <pre><code class="html">  <textarea class="editor" rows="10">...</textarea></code></pre>
       </div>
-      <div class="edit-html-btn" style="text-align: center;">
+      <div class="edit-html-btn">
         <a href="javascript:;" class="btn-update-edit-html">Update HTML</a> || <a href="javascript:;" class="btn-close-edit-html">Close</a>
       </div>
     </div>
@@ -691,16 +691,16 @@ function EventClick(e) {
       }, 600)
     }
     // pastEl = el // gán el click trước để remove  .card-ex-edit, .card-ex-edit*
-
-    //== Edit as HTML Init
-    setTimeout(function(){
-      $('#editAsHtmlBtn').on('click', function(){
-        let $exPopupDetail = $('#popup-detail');
-        editAsHTML(e, $exPopupDetail)
-      })
-    }, 100)
-    //== End Edit as HTML Init
   }
+
+  //== Edit as HTML Init
+  setTimeout(function(){
+    $('#editAsHtmlBtn').on('click', function(){
+      let $exPopupDetail = $('#popup-detail');
+      editAsHTML(e, $exPopupDetail)
+    })
+  }, 100)
+  //== End Edit as HTML Init
 
   $('#editCotent').click(btnEditClick(e))
   let addEF = document.getElementById('popup-detail')

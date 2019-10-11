@@ -269,3 +269,14 @@
 #editAsHtmlBtn img {
   width: 25px;
 }
+/*Edit as HTML*/
+.card-edit-as-html{
+  display:none;
+  width: auto; 
+  margin-top: 10px; 
+  text-align:center;
+}
+.edit-html-editor .editor{
+  min-width: 590px;
+} 
+/*End Edit as HTML*/
