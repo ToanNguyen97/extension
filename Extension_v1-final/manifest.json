@@ -16,14 +16,14 @@
     "storage"
   ],
   "background": {
-    "page": "background.html",
+    "scripts": ["background.js"],
     "persistent": false
   },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
       "css": ["content.css"],
-      "js": ["jquery.min.js","content.js"]
+      "js": ["highlightjs.min.js","jquery.min.js","content.js"]
     }
   ],
   "icons": {

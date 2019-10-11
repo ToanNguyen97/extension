@@ -824,34 +824,25 @@ function WonderTest() {
 }
 
 WonderTest.prototype.Enable = function () {
-  chrome.storage.local.set({
-    Clicked: false
-  }, function () {})
   let divClose = document.createElement('div')
   $(divClose).addClass('open-ex')
   divClose.innerHTML = `
   <button class="btnGlobal">Exit Tool</button>`
   document.body.appendChild(divClose)
   this.AddEventListeners();
+  this.haveEventListeners = true
 }
 WonderTest.prototype.Disable = function () {
-  chrome.storage.local.set({
-    Clicked: true
-  }, function () {})
   if ($('.open-ex').length > 0) {
     $('.open-ex').remove()
   }
+  if ($('.popup-hover').length > 0) {
+    $('.popup-hover').remove()
+  }
   this.RemoveEventListeners();
+  this.haveEventListeners = false
 }
-
 WonderTest = new WonderTest()
-
-if (WonderTest.haveEventListeners === false) {
-  WonderTest.Enable()
-  WonderTest.hljs.initHighlightingOnLoad
-} else {
-  WonderTest.Disable()
-}
 
 $("body").on('click', '#btnClose', function (e) {
   let popupNew = document.getElementById('popup-ex')
@@ -880,7 +871,7 @@ $("body").on('click', '#changePosition img', () => {
     }
   }
 })
-$('.btnGlobal').click(function (e) {
+$("body").on('click', '.btnGlobal', (e) => {
   WonderTest.Disable()
 })
 //tooltip css
@@ -945,7 +936,14 @@ var editAsHTML = function(e, $exPopupDetail){
   }
 }
 /*=== END EDIT AS HTML==== */
-chrome.runtime.onMessage.addListener(function (msg, sender) {
-  console.log('msg',msg)
-  console.log('sender', sender)
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    if(request.action = 'OpenOrReload') {
+      if (WonderTest.haveEventListeners === false) {
+        WonderTest.Enable()
+        WonderTest.hljs.initHighlightingOnLoad
+      } else {
+        WonderTest.Disable()
+      }
+    }
 })
