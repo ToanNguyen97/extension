@@ -23,7 +23,7 @@
     {
       "matches": ["<all_urls>"],
       "css": ["content.css"],
-      "js": ["highlightjs.min.js","jquery.min.js","content.js"]
+      "js": ["jquery.min.js","highlightjs.min.js","content.js"]
     }
   ],
   "icons": {

@@ -1,6 +1,6 @@
 /* eslint-disable */
 // console.log(hljs)
-// const hljs = requ
+
 function GetCurrentDocument() {
   return window.document;
 }
@@ -647,6 +647,7 @@ function EventClick(e) {
     </div>`
 
     document.body.appendChild(newEl)
+   console.log( WonderTest.hljs.initHighlightingOnLoad())
     let styleNew = document.getElementById('popup-detail')
     let cardContent = document.getElementsByClassName('card-content')
     let cardDes = document.getElementsByClassName('card-des')
@@ -941,7 +942,7 @@ chrome.runtime.onMessage.addListener(
     if(request.action = 'OpenOrReload') {
       if (WonderTest.haveEventListeners === false) {
         WonderTest.Enable()
-        WonderTest.hljs.initHighlightingOnLoad
+      
       } else {
         WonderTest.Disable()
       }
